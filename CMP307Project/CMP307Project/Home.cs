@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;    //  When accessing the database
 using System.Data.SqlTypes;     //  when retrieving from database
 using System.Data;  //  for different data containers
+using System.Management;
 
 namespace CMP307Project
 {
@@ -16,7 +17,10 @@ namespace CMP307Project
         {
             //  On programme start these functions will be run
             InitializeComponent();
-            InsertData();
+            //InsertData();
+            lstView.Visible = true;
+            GetComponent("Win32_Processor", "Name");
+            GetComponent("Win32_VideoController", "Name");
         }
 
         public void InsertData() // Receives the data from the database and inserts it into lstView
@@ -47,6 +51,15 @@ namespace CMP307Project
 
             conn.Close();
             Console.WriteLine("\nConnection successfully terminated.");
+        }
+
+        private void GetComponent(string hwclass, string syntax)
+        {
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM " + hwclass);
+            foreach (ManagementObject mj in mos.Get())
+            {
+                lstView.Items.Add((Convert.ToString(mj[syntax])) + "\r\n");
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)

@@ -49,12 +49,12 @@ namespace CMP307Project
             this.lblInsertIPAddr = new System.Windows.Forms.Label();
             this.txtInsertIPAddr = new System.Windows.Forms.TextBox();
             this.lblInsertPurchDate = new System.Windows.Forms.Label();
+            this.txtInsertPurchDate = new System.Windows.Forms.TextBox();
             this.lblInsertNotes = new System.Windows.Forms.Label();
             this.txtInsertNotes = new System.Windows.Forms.TextBox();
             this.flpInsertButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.btnInsertSubmit = new System.Windows.Forms.Button();
             this.btnInsertCancel = new System.Windows.Forms.Button();
-            this.txtInsertPurchDate = new System.Windows.Forms.TextBox();
             this.flpInsertAsset.SuspendLayout();
             this.flpInsertButtons.SuspendLayout();
             this.SuspendLayout();
@@ -139,8 +139,8 @@ namespace CMP307Project
             // 
             // lstView
             // 
-            this.lstView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.lstView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lstView.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstView.FormattingEnabled = true;
@@ -294,6 +294,14 @@ namespace CMP307Project
             this.lblInsertPurchDate.TabIndex = 10;
             this.lblInsertPurchDate.Text = "Enter the Purchase Date (Format YYYY-MM-DD)";
             // 
+            // txtInsertPurchDate
+            // 
+            this.txtInsertPurchDate.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtInsertPurchDate.Location = new System.Drawing.Point(3, 321);
+            this.txtInsertPurchDate.Name = "txtInsertPurchDate";
+            this.txtInsertPurchDate.Size = new System.Drawing.Size(494, 30);
+            this.txtInsertPurchDate.TabIndex = 11;
+            // 
             // lblInsertNotes
             // 
             this.lblInsertNotes.AutoSize = true;
@@ -342,14 +350,6 @@ namespace CMP307Project
             this.btnInsertCancel.Text = "Cancel";
             this.btnInsertCancel.UseVisualStyleBackColor = true;
             this.btnInsertCancel.Click += new System.EventHandler(this.btnInsertCancel_Click);
-            // 
-            // txtInsertPurchDate
-            // 
-            this.txtInsertPurchDate.Font = new System.Drawing.Font("Arial", 12F);
-            this.txtInsertPurchDate.Location = new System.Drawing.Point(3, 321);
-            this.txtInsertPurchDate.Name = "txtInsertPurchDate";
-            this.txtInsertPurchDate.Size = new System.Drawing.Size(494, 30);
-            this.txtInsertPurchDate.TabIndex = 11;
             // 
             // Home
             // 
