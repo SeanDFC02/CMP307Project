@@ -55,6 +55,8 @@ namespace CMP307Project
             this.flpInsertButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.btnInsertSubmit = new System.Windows.Forms.Button();
             this.btnInsertCancel = new System.Windows.Forms.Button();
+            this.lstViewAutoData = new System.Windows.Forms.ListBox();
+            this.btnViewAutoData = new System.Windows.Forms.Button();
             this.flpInsertAsset.SuspendLayout();
             this.flpInsertButtons.SuspendLayout();
             this.SuspendLayout();
@@ -94,7 +96,7 @@ namespace CMP307Project
             this.btnView.Name = "btnView";
             this.btnView.Size = new System.Drawing.Size(248, 139);
             this.btnView.TabIndex = 2;
-            this.btnView.Text = "View Data";
+            this.btnView.Text = "View DB Data";
             this.btnView.UseVisualStyleBackColor = true;
             this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
@@ -351,12 +353,44 @@ namespace CMP307Project
             this.btnInsertCancel.UseVisualStyleBackColor = true;
             this.btnInsertCancel.Click += new System.EventHandler(this.btnInsertCancel_Click);
             // 
+            // lstViewAutoData
+            // 
+            this.lstViewAutoData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstViewAutoData.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstViewAutoData.FormattingEnabled = true;
+            this.lstViewAutoData.ItemHeight = 19;
+            this.lstViewAutoData.Location = new System.Drawing.Point(294, 197);
+            this.lstViewAutoData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lstViewAutoData.Name = "lstViewAutoData";
+            this.lstViewAutoData.Size = new System.Drawing.Size(846, 460);
+            this.lstViewAutoData.TabIndex = 9;
+            this.lstViewAutoData.Visible = false;
+            // 
+            // btnViewAutoData
+            // 
+            this.btnViewAutoData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnViewAutoData.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold);
+            this.btnViewAutoData.Location = new System.Drawing.Point(614, 288);
+            this.btnViewAutoData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnViewAutoData.Name = "btnViewAutoData";
+            this.btnViewAutoData.Size = new System.Drawing.Size(248, 139);
+            this.btnViewAutoData.TabIndex = 10;
+            this.btnViewAutoData.Text = "View Auto Data";
+            this.btnViewAutoData.UseVisualStyleBackColor = true;
+            this.btnViewAutoData.Click += new System.EventHandler(this.btnViewAutoData_Click);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(1477, 714);
+            this.Controls.Add(this.btnViewAutoData);
+            this.Controls.Add(this.lstViewAutoData);
             this.Controls.Add(this.flpInsertAsset);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lstView);
@@ -407,5 +441,7 @@ namespace CMP307Project
         private System.Windows.Forms.FlowLayoutPanel flpInsertButtons;
         private System.Windows.Forms.Button btnInsertSubmit;
         private System.Windows.Forms.Button btnInsertCancel;
+        private System.Windows.Forms.ListBox lstViewAutoData;
+        private System.Windows.Forms.Button btnViewAutoData;
     }
 }

@@ -17,10 +17,7 @@ namespace CMP307Project
         {
             //  On programme start these functions will be run
             InitializeComponent();
-            //InsertData();
-            lstView.Visible = true;
-            GetComponent("Win32_Processor", "Name");
-            GetComponent("Win32_VideoController", "Name");
+            InsertData();
         }
 
         public void InsertData() // Receives the data from the database and inserts it into lstView
@@ -55,11 +52,24 @@ namespace CMP307Project
 
         private void GetComponent(string hwclass, string syntax)
         {
+            //  Implemented from Youtube https://www.youtube.com/watch?v=rou471Evuzc
+            lstViewAutoData.Visible = true;
             ManagementObjectSearcher mos = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM " + hwclass);
             foreach (ManagementObject mj in mos.Get())
             {
-                lstView.Items.Add((Convert.ToString(mj[syntax])) + "\r\n");
+                lstViewAutoData.Items.Add((Convert.ToString(mj[syntax])) + "\r\n");
             }
+        }
+
+        private void btnViewAutoData_Click(object sender, EventArgs e)
+        {
+            btnViewAutoData.Visible = false;
+            int i = 0;  //  Declares counter initially 0;
+
+            lstViewAutoData.Visible = true;
+            lstViewAutoData.Items.Add("AssNum\tSystem Name\tManufacturer\tType");
+            GetComponent("Win32_Processor", "Name");
+            GetComponent("Win32_VideoController", "Name");
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -69,6 +79,7 @@ namespace CMP307Project
 
         private void btnView_Click(object sender, EventArgs e)
         {
+            lstViewAutoData.Visible = false;
             flpInsertAsset.Visible = false; //  Ensures that the form is closed if it isn't already
             lstView.Visible = true; //  Shows the list box containing all the data from the database
         }
@@ -128,6 +139,9 @@ namespace CMP307Project
             //  Runs the insert data function again so that the
             //  new data will be present in the list box when viewed
             InsertData();
+
+            //  Pop-up alert stating Data was successfully added
+            System.Windows.Forms.MessageBox.Show("Your data was successfully inputted into the database");
         }
 
         private void btnInsertCancel_Click(object sender, EventArgs e)
