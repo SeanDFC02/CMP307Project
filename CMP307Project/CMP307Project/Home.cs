@@ -114,7 +114,7 @@ namespace CMP307Project
             changeVisibility();
 
             //  Clears the list box lstView, ready to receive the new data
-            lstSystemData.Items.Clear();
+            lstSystemHardware.Items.Clear();
 
             //  Runs the insert data function again so that the
             //  new data will be present in the list box when viewed
@@ -150,6 +150,7 @@ namespace CMP307Project
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            changeVisibility();
             flpLogin.Visible = true;
         }
 
@@ -157,9 +158,10 @@ namespace CMP307Project
         {
             flpLogin.Visible = false;
             flpInsertAsset.Visible = false;
-            lstSystemData.Visible = false;
+            lstSystemHardware.Visible = false;
             lstHardwareData.Visible = false;
             lstSoftwareData.Visible = false;
+            flpSystemData.Visible = false;
         }
 
         private void btnSubmitLogin_Click(object sender, EventArgs e)
@@ -225,11 +227,14 @@ namespace CMP307Project
         {
             changeVisibility();
 
-            lstSystemData.Visible = true;
+            flpSystemData.Visible = true;
+            lstSystemHardware.Visible = true;
+            lstSystemSoftware.Visible = true;
         }
 
         private void getSystemData()
         {
+
             getHardwareData("Win32_Processor");
             getHardwareData("Win32_DiskDrive");
             getHardwareData("Win32_SoundDevice");
@@ -237,6 +242,8 @@ namespace CMP307Project
             getHardwareData("Win32_Keyboard");
             getHardwareData("Win32_PointingDevice");
             getHardwareData("Win32_NetworkAdapter");
+
+            getSoftwareData("Win32_ComputerSystem");
         }
 
         private void getHardwareData(string hwclass)
@@ -245,10 +252,23 @@ namespace CMP307Project
             ManagementObjectSearcher mos = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM " + hwclass);
             foreach (ManagementObject mj in mos.Get())
             {
-                lstSystemData.Items.Add("Hardware Name: " + Convert.ToString(mj["Name"]));
-                lstSystemData.Items.Add("Hardware Description: " + Convert.ToString(mj["Description"]));
-                lstSystemData.Items.Add("Hardware System Name: " + Convert.ToString(mj["SystemName"]));
-                lstSystemData.Items.Add("");
+                lstSystemHardware.Items.Add("Hardware Name: " + Convert.ToString(mj["Name"]));
+                lstSystemHardware.Items.Add("Hardware Description: " + Convert.ToString(mj["Description"]));
+                lstSystemHardware.Items.Add("Hardware System Name: " + Convert.ToString(mj["SystemName"]));
+                lstSystemHardware.Items.Add("");
+            }
+        }
+
+        private void getSoftwareData(string hwclass)
+        {
+            //  Implemented from https://www.youtube.com/watch?v=rou471Evuzc
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM " + hwclass);
+            foreach (ManagementObject mj in mos.Get())
+            {
+                lstSystemSoftware.Items.Add("Software Name: " + Convert.ToString(mj["Name"]));
+                lstSystemSoftware.Items.Add("Software Description: " + Convert.ToString(mj["Description"]));
+                lstSystemSoftware.Items.Add("Software System Type: " + Convert.ToString(mj["SystemType"]));
+                lstSystemSoftware.Items.Add("");
             }
         }
 
