@@ -8,6 +8,8 @@ using System.Data.SqlClient;    //  When accessing the database
 using System.Data.SqlTypes;     //  when retrieving from database
 using System.Data;  //  for different data containers
 using System.Management;
+using System.Management.Instrumentation;
+using System.Security.Cryptography;
 
 namespace CMP307Project
 {
@@ -50,14 +52,34 @@ namespace CMP307Project
             Console.WriteLine("\nConnection successfully terminated.");
         }
 
-        private void GetComponent(string hwclass, string syntax)
+        private void GetComponent(string hwclass)
         {
-            //  Implemented from Youtube https://www.youtube.com/watch?v=rou471Evuzc
+            //  Implemented from https://csharp.hotexamples.com/examples/System.Management/ManagementObjectSearcher/-/php-managementobjectsearcher-class-examples.html
+            //  using example #2
             lstViewAutoData.Visible = true;
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM " + hwclass);
+            /*ManagementObjectSearcher mos = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM " + hwclass);
             foreach (ManagementObject mj in mos.Get())
             {
                 lstViewAutoData.Items.Add((Convert.ToString(mj[syntax])) + "\r\n");
+            }*/
+            ManagementObjectSearcher query;
+            ManagementObjectCollection queryCollection;
+            string sQuery = ("SELECT * FROM " + hwclass);
+
+            query = new ManagementObjectSearcher(sQuery);
+            queryCollection = query.Get();
+
+            foreach( ManagementObject mo in queryCollection )
+            {
+                lstViewAutoData.Items.Add(Convert.ToString(mo["Name"]));
+                //lstViewAutoData.Items.Add((String)(mo["Resolution"]));
+                //lstViewAutoData.Items.Add(Convert.ToString(mo));
+
+                //lstViewAutoData.Items.Add("Name: " + (string)mo["Name"]);
+                //lstViewAutoData.Items.Add("DriverName: " + (string)mo["DriverName"]);
+                //lstViewAutoData.Items.Add("PrinterStatus: " + Convert.ToString(mo["PrinterStatus"]));
+                //lstViewAutoData.Items.Add("PrinterState: " + Convert.ToString(mo["PrinterState"]));
+                //lstViewAutoData.Items.Add("Printer Driver " /*+ sDefault*/);
             }
         }
 
@@ -67,9 +89,10 @@ namespace CMP307Project
             int i = 0;  //  Declares counter initially 0;
 
             lstViewAutoData.Visible = true;
-            lstViewAutoData.Items.Add("AssNum\tSystem Name\tManufacturer\tType");
-            GetComponent("Win32_Processor", "Name");
-            GetComponent("Win32_VideoController", "Name");
+
+            //lstViewAutoData.Items.Add("AssNum\tSystem Name\tManufacturer\tType");
+            //GetComponent("Win32_Printer");
+            GetComponent("Win32_VideoController");
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -157,6 +180,142 @@ namespace CMP307Project
 
             //  Hides form after cancel button has been pressed
             flpInsertAsset.Visible = false;
+        }
+
+        private void btnCancelLogin_Click(object sender, EventArgs e)
+        {
+            //  Clears all text boxes after the cancel button has been pressed
+            txtPassword.Clear();
+            txtUsername.Clear();
+
+            //  Hides form after cancel button has been pressed
+            flpLogin.Visible = false;
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            flpLogin.Visible = true;
+        }
+
+        private void btnSubmitLogin_Click(object sender, EventArgs e)
+        {
+            string username = txtUsername.Text.ToString();
+            string password = txtPassword.Text.ToString();
+            string userPass = "";
+            int userID = 0;
+
+            SqlConnection conn;
+            string connString = "Data Source = tolmount.abertay.ac.uk; Initial Catalog = mssql2002590; User ID = mssql2002590; Password = huG72W6hwB";
+            conn = new SqlConnection(connString);
+            conn.Open();
+
+            SqlCommand command;
+            SqlDataReader dataReader;
+            string sql, Output = "";
+
+            sql = "SELECT * FROM SCOT.STAFF WHERE UserName = '" + username + "';";
+            command = new SqlCommand(sql, conn);
+            dataReader = command.ExecuteReader();
+
+            if (txtUsername.Text == "" || txtPassword.Text == "")
+            {
+                txtUsername.Clear();
+                txtPassword.Clear();
+                MessageBox.Show("Incorrect Password or Username. Please try again.");
+            }
+            else if (dataReader.HasRows)
+            {
+                while (dataReader.Read())
+                {
+                    userID = Convert.ToInt32(dataReader[0]);
+                    userPass = Convert.ToString(dataReader[1]);
+
+                    if (password == userPass)
+                    {
+                        txtUsername.Clear();
+                        txtPassword.Clear();
+                        MessageBox.Show("User has successfully logged in!");
+                    }
+                    else
+                    {
+                        txtUsername.Clear();
+                        txtPassword.Clear();
+                        MessageBox.Show("Incorrect username or password. Please try again");
+                    }
+                }
+            }
+            else
+            {
+                txtUsername.Clear();
+                txtPassword.Clear();
+                MessageBox.Show("Incorrect username or password. Please try again.");
+            }
+
+
+
+
+
+            /*string username = txtUsername.Text.ToString();
+            string password = txtPassword.Text.ToString();
+            int userID = 0;
+            string userPass = "";
+
+            if (username != "" && password != "")
+            {
+                //  Select query
+                SqlConnection conn;
+
+                string connString = "Data Source = tolmount.abertay.ac.uk; Initial Catalog = mssql2002590; User ID = mssql2002590; Password = huG72W6hwB";
+
+                conn = new SqlConnection(connString);
+
+                conn.Open();
+                Console.WriteLine("Connection Successfully established.\n");
+                string query = ("SELECT TOP 1 * FROM SCOT.STAFF WHERE UserName = '" + username + "' UserPass = '" + password + "';");
+
+                SqlCommand Command = new SqlCommand(query);
+
+                Command.Connection = conn;
+
+                SqlDataReader data = Command.ExecuteReader();
+                while (data.Read())
+                {
+                    userID = Convert.ToInt32(data[0]);
+                    userPass = Convert.ToString(data[1]);
+                }
+                data.Close();
+
+                MessageBox.Show(userID + userPass);
+
+                if (userID > 0)
+                {
+                    if (password == userPass)
+                    {
+                        txtUsername.Clear();
+                        txtPassword.Clear();
+                        MessageBox.Show("User has successfully logged in.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Incorrect Password or Username");
+                    }
+                }
+                else
+                {
+                    txtUsername.Clear();
+                    txtPassword.Clear();
+                    MessageBox.Show("Incorrect Password or Username. Please try again.");
+                }
+
+                conn.Close();
+                Console.WriteLine("\nConnection successfully terminated.");
+            }
+            else
+            {
+                txtUsername.Clear();
+                txtPassword.Clear();
+                MessageBox.Show("Username and Password both must be inputted to continue!");                
+            }*/
         }
     }
 }

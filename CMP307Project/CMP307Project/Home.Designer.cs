@@ -57,8 +57,18 @@ namespace CMP307Project
             this.btnInsertCancel = new System.Windows.Forms.Button();
             this.lstViewAutoData = new System.Windows.Forms.ListBox();
             this.btnViewAutoData = new System.Windows.Forms.Button();
+            this.flpLogin = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblUsername = new System.Windows.Forms.Label();
+            this.txtUsername = new System.Windows.Forms.TextBox();
+            this.lblPassword = new System.Windows.Forms.Label();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnSubmitLogin = new System.Windows.Forms.Button();
+            this.btnCancelLogin = new System.Windows.Forms.Button();
             this.flpInsertAsset.SuspendLayout();
             this.flpInsertButtons.SuspendLayout();
+            this.flpLogin.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -77,7 +87,6 @@ namespace CMP307Project
             // btnLogin
             // 
             this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLogin.Enabled = false;
             this.btnLogin.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold);
             this.btnLogin.Location = new System.Drawing.Point(12, 10);
             this.btnLogin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -86,6 +95,7 @@ namespace CMP307Project
             this.btnLogin.TabIndex = 1;
             this.btnLogin.Text = "Log In";
             this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // btnView
             // 
@@ -192,7 +202,7 @@ namespace CMP307Project
             this.flpInsertAsset.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpInsertAsset.Location = new System.Drawing.Point(453, 149);
             this.flpInsertAsset.Name = "flpInsertAsset";
-            this.flpInsertAsset.Size = new System.Drawing.Size(511, 553);
+            this.flpInsertAsset.Size = new System.Drawing.Size(519, 806);
             this.flpInsertAsset.TabIndex = 8;
             this.flpInsertAsset.Visible = false;
             // 
@@ -383,12 +393,96 @@ namespace CMP307Project
             this.btnViewAutoData.UseVisualStyleBackColor = true;
             this.btnViewAutoData.Click += new System.EventHandler(this.btnViewAutoData_Click);
             // 
+            // flpLogin
+            // 
+            this.flpLogin.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.flpLogin.BackColor = System.Drawing.Color.White;
+            this.flpLogin.Controls.Add(this.lblUsername);
+            this.flpLogin.Controls.Add(this.txtUsername);
+            this.flpLogin.Controls.Add(this.lblPassword);
+            this.flpLogin.Controls.Add(this.txtPassword);
+            this.flpLogin.Controls.Add(this.flowLayoutPanel2);
+            this.flpLogin.Location = new System.Drawing.Point(453, 294);
+            this.flpLogin.Name = "flpLogin";
+            this.flpLogin.Size = new System.Drawing.Size(498, 253);
+            this.flpLogin.TabIndex = 11;
+            this.flpLogin.Visible = false;
+            // 
+            // lblUsername
+            // 
+            this.lblUsername.AutoSize = true;
+            this.lblUsername.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsername.Location = new System.Drawing.Point(3, 0);
+            this.lblUsername.Name = "lblUsername";
+            this.lblUsername.Size = new System.Drawing.Size(257, 23);
+            this.lblUsername.TabIndex = 0;
+            this.lblUsername.Text = "Please enter your username";
+            // 
+            // txtUsername
+            // 
+            this.txtUsername.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtUsername.Location = new System.Drawing.Point(3, 26);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(494, 30);
+            this.txtUsername.TabIndex = 1;
+            // 
+            // lblPassword
+            // 
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.Font = new System.Drawing.Font("Arial", 12F);
+            this.lblPassword.Location = new System.Drawing.Point(3, 59);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(257, 23);
+            this.lblPassword.TabIndex = 2;
+            this.lblPassword.Text = "Please enter your password";
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtPassword.Location = new System.Drawing.Point(3, 85);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '*';
+            this.txtPassword.Size = new System.Drawing.Size(494, 30);
+            this.txtPassword.TabIndex = 3;
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Controls.Add(this.btnSubmitLogin);
+            this.flowLayoutPanel2.Controls.Add(this.btnCancelLogin);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 121);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(494, 123);
+            this.flowLayoutPanel2.TabIndex = 14;
+            // 
+            // btnSubmitLogin
+            // 
+            this.btnSubmitLogin.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubmitLogin.Location = new System.Drawing.Point(3, 3);
+            this.btnSubmitLogin.Name = "btnSubmitLogin";
+            this.btnSubmitLogin.Size = new System.Drawing.Size(242, 120);
+            this.btnSubmitLogin.TabIndex = 0;
+            this.btnSubmitLogin.Text = "Submit";
+            this.btnSubmitLogin.UseVisualStyleBackColor = true;
+            this.btnSubmitLogin.Click += new System.EventHandler(this.btnSubmitLogin_Click);
+            // 
+            // btnCancelLogin
+            // 
+            this.btnCancelLogin.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelLogin.Location = new System.Drawing.Point(251, 3);
+            this.btnCancelLogin.Name = "btnCancelLogin";
+            this.btnCancelLogin.Size = new System.Drawing.Size(240, 120);
+            this.btnCancelLogin.TabIndex = 1;
+            this.btnCancelLogin.Text = "Cancel";
+            this.btnCancelLogin.UseVisualStyleBackColor = true;
+            this.btnCancelLogin.Click += new System.EventHandler(this.btnCancelLogin_Click);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(1477, 714);
+            this.Controls.Add(this.flpLogin);
             this.Controls.Add(this.btnViewAutoData);
             this.Controls.Add(this.lstViewAutoData);
             this.Controls.Add(this.flpInsertAsset);
@@ -408,6 +502,9 @@ namespace CMP307Project
             this.flpInsertAsset.ResumeLayout(false);
             this.flpInsertAsset.PerformLayout();
             this.flpInsertButtons.ResumeLayout(false);
+            this.flpLogin.ResumeLayout(false);
+            this.flpLogin.PerformLayout();
+            this.flowLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -443,5 +540,13 @@ namespace CMP307Project
         private System.Windows.Forms.Button btnInsertCancel;
         private System.Windows.Forms.ListBox lstViewAutoData;
         private System.Windows.Forms.Button btnViewAutoData;
+        private System.Windows.Forms.FlowLayoutPanel flpLogin;
+        private System.Windows.Forms.Label lblUsername;
+        private System.Windows.Forms.TextBox txtUsername;
+        private System.Windows.Forms.Label lblPassword;
+        private System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Button btnSubmitLogin;
+        private System.Windows.Forms.Button btnCancelLogin;
     }
 }
