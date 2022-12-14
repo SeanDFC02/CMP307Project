@@ -35,7 +35,7 @@ namespace CMP307Project
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.lstView = new System.Windows.Forms.ListBox();
+            this.lstSystemData = new System.Windows.Forms.ListBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.flpInsertAsset = new System.Windows.Forms.FlowLayoutPanel();
             this.lblInsertSysName = new System.Windows.Forms.Label();
@@ -65,6 +65,8 @@ namespace CMP307Project
             this.btnCancelLogin = new System.Windows.Forms.Button();
             this.btnViewSoftware = new System.Windows.Forms.Button();
             this.btnViewSystem = new System.Windows.Forms.Button();
+            this.lstHardwareData = new System.Windows.Forms.ListBox();
+            this.lstSoftwareData = new System.Windows.Forms.ListBox();
             this.flpInsertAsset.SuspendLayout();
             this.flpInsertButtons.SuspendLayout();
             this.flpLogin.SuspendLayout();
@@ -151,20 +153,20 @@ namespace CMP307Project
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // lstView
+            // lstSystemData
             // 
-            this.lstView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lstSystemData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lstView.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lstView.FormattingEnabled = true;
-            this.lstView.ItemHeight = 19;
-            this.lstView.Location = new System.Drawing.Point(294, 197);
-            this.lstView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.lstView.Name = "lstView";
-            this.lstView.Size = new System.Drawing.Size(846, 460);
-            this.lstView.TabIndex = 6;
-            this.lstView.Visible = false;
+            this.lstSystemData.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstSystemData.FormattingEnabled = true;
+            this.lstSystemData.ItemHeight = 19;
+            this.lstSystemData.Location = new System.Drawing.Point(294, 202);
+            this.lstSystemData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lstSystemData.Name = "lstSystemData";
+            this.lstSystemData.Size = new System.Drawing.Size(846, 460);
+            this.lstSystemData.TabIndex = 6;
+            this.lstSystemData.Visible = false;
             // 
             // btnClose
             // 
@@ -460,6 +462,7 @@ namespace CMP307Project
             this.btnViewSoftware.TabIndex = 12;
             this.btnViewSoftware.Text = "View Software Data";
             this.btnViewSoftware.UseVisualStyleBackColor = true;
+            this.btnViewSoftware.Click += new System.EventHandler(this.btnViewSoftware_Click);
             // 
             // btnViewSystem
             // 
@@ -473,6 +476,37 @@ namespace CMP307Project
             this.btnViewSystem.TabIndex = 13;
             this.btnViewSystem.Text = "View System Data";
             this.btnViewSystem.UseVisualStyleBackColor = true;
+            this.btnViewSystem.Click += new System.EventHandler(this.btnViewSystem_Click);
+            // 
+            // lstHardwareData
+            // 
+            this.lstHardwareData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstHardwareData.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstHardwareData.FormattingEnabled = true;
+            this.lstHardwareData.ItemHeight = 19;
+            this.lstHardwareData.Location = new System.Drawing.Point(294, 202);
+            this.lstHardwareData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lstHardwareData.Name = "lstHardwareData";
+            this.lstHardwareData.Size = new System.Drawing.Size(846, 460);
+            this.lstHardwareData.TabIndex = 14;
+            this.lstHardwareData.Visible = false;
+            // 
+            // lstSoftwareData
+            // 
+            this.lstSoftwareData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstSoftwareData.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstSoftwareData.FormattingEnabled = true;
+            this.lstSoftwareData.ItemHeight = 19;
+            this.lstSoftwareData.Location = new System.Drawing.Point(294, 202);
+            this.lstSoftwareData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lstSoftwareData.Name = "lstSoftwareData";
+            this.lstSoftwareData.Size = new System.Drawing.Size(846, 460);
+            this.lstSoftwareData.TabIndex = 15;
+            this.lstSoftwareData.Visible = false;
             // 
             // Home
             // 
@@ -480,12 +514,14 @@ namespace CMP307Project
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(1477, 714);
+            this.Controls.Add(this.lstSoftwareData);
+            this.Controls.Add(this.lstHardwareData);
             this.Controls.Add(this.btnViewSystem);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnViewSoftware);
             this.Controls.Add(this.flpLogin);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.lstView);
+            this.Controls.Add(this.lstSystemData);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnViewHardware);
@@ -516,7 +552,7 @@ namespace CMP307Project
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.ListBox lstView;
+        private System.Windows.Forms.ListBox lstSystemData;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.FlowLayoutPanel flpInsertAsset;
         private System.Windows.Forms.Label lblInsertSysName;
@@ -546,5 +582,7 @@ namespace CMP307Project
         private System.Windows.Forms.Button btnCancelLogin;
         private System.Windows.Forms.Button btnViewSoftware;
         private System.Windows.Forms.Button btnViewSystem;
+        private System.Windows.Forms.ListBox lstHardwareData;
+        private System.Windows.Forms.ListBox lstSoftwareData;
     }
 }

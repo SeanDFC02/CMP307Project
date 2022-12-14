@@ -20,6 +20,8 @@ namespace CMP307Project
             //  On programme start these functions will be run
             InitializeComponent();
             InsertData();
+
+            getSystemData();
         }
 
         public void InsertData() // Receives the data from the database and inserts it into lstView
@@ -40,48 +42,17 @@ namespace CMP307Project
             Command.Connection = conn;
 
             SqlDataReader data = Command.ExecuteReader();
-            lstView.Items.Add("AssNum\tSystem Name\tModel\tManufacturer\tType\tIP\t\tPurchase Date\t\tNotes");
+            lstHardwareData.Items.Add("AssNum\tSystem Name\tModel\tManufacturer\tType\tIP\t\tPurchase Date\t\tNotes");
             while (data.Read())
             {
                 //  Inserts data into the list box lstView
-                lstView.Items.Add(data[0] + "\t" + data[1] + "\t" + data[2] + "\t" + data[3] + "\t" + data[4] + "\t" + data[5] + "\t" + data[6] + "\t" + data[7]);
+                lstHardwareData.Items.Add(data[0] + "\t" + data[1] + "\t" + data[2] + "\t" + data[3] + "\t" + data[4] + "\t" + data[5] + "\t" + data[6] + "\t" + data[7]);
             }
             data.Close();
 
             conn.Close();
             Console.WriteLine("\nConnection successfully terminated.");
         }
-
-        /*private void GetComponent(string hwclass)
-        {
-            //  Implemented from https://csharp.hotexamples.com/examples/System.Management/ManagementObjectSearcher/-/php-managementobjectsearcher-class-examples.html
-            //  using example #2
-            lstViewAutoData.Visible = true;
-            /*ManagementObjectSearcher mos = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM " + hwclass);
-            foreach (ManagementObject mj in mos.Get())
-            {
-                lstViewAutoData.Items.Add((Convert.ToString(mj[syntax])) + "\r\n");
-            }*/
-            /*ManagementObjectSearcher query;
-            ManagementObjectCollection queryCollection;
-            string sQuery = ("SELECT * FROM " + hwclass);
-
-            query = new ManagementObjectSearcher(sQuery);
-            queryCollection = query.Get();
-
-            foreach( ManagementObject mo in queryCollection )
-            {
-                lstViewAutoData.Items.Add(Convert.ToString(mo["Name"]));
-                //lstViewAutoData.Items.Add((String)(mo["Resolution"]));
-                //lstViewAutoData.Items.Add(Convert.ToString(mo));
-
-                //lstViewAutoData.Items.Add("Name: " + (string)mo["Name"]);
-                //lstViewAutoData.Items.Add("DriverName: " + (string)mo["DriverName"]);
-                //lstViewAutoData.Items.Add("PrinterStatus: " + Convert.ToString(mo["PrinterStatus"]));
-                //lstViewAutoData.Items.Add("PrinterState: " + Convert.ToString(mo["PrinterState"]));
-                //lstViewAutoData.Items.Add("Printer Driver " + sDefault);
-            }
-        }*/
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -90,14 +61,14 @@ namespace CMP307Project
 
         private void btnView_Click(object sender, EventArgs e)
         {
-            flpInsertAsset.Visible = false; //  Ensures that the form is closed if it isn't already
-            lstView.Visible = true; //  Shows the list box containing all the data from the database
+            changeVisibility();
+            lstHardwareData.Visible = true; //  Shows the list box containing all the data from the database
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            changeVisibility();
             flpInsertAsset.Visible = true;  //  Shows the form that allows the user to insert data
-            lstView.Visible = false;    //  Hides the list box lstView
         }
 
         private void btnInsertSubmit_Click(object sender, EventArgs e)
@@ -140,18 +111,17 @@ namespace CMP307Project
             txtInsertPurchDate.Clear();
             txtInsertNotes.Clear();
 
-            //  Hides form after data has been submitted
-            flpInsertAsset.Visible = false;
+            changeVisibility();
 
             //  Clears the list box lstView, ready to receive the new data
-            lstView.Items.Clear();
+            lstSystemData.Items.Clear();
 
             //  Runs the insert data function again so that the
             //  new data will be present in the list box when viewed
             InsertData();
 
             //  Pop-up alert stating Data was successfully added
-            System.Windows.Forms.MessageBox.Show("Your data was successfully inputted into the database");
+            MessageBox.Show("Your data was successfully inputted into the database");
         }
 
         private void btnInsertCancel_Click(object sender, EventArgs e)
@@ -165,8 +135,7 @@ namespace CMP307Project
             txtInsertPurchDate.Clear();
             txtInsertNotes.Clear();
 
-            //  Hides form after cancel button has been pressed
-            flpInsertAsset.Visible = false;
+            changeVisibility();
         }
 
         private void btnCancelLogin_Click(object sender, EventArgs e)
@@ -182,6 +151,15 @@ namespace CMP307Project
         private void btnLogin_Click(object sender, EventArgs e)
         {
             flpLogin.Visible = true;
+        }
+
+        private void changeVisibility()
+        {
+            flpLogin.Visible = false;
+            flpInsertAsset.Visible = false;
+            lstSystemData.Visible = false;
+            lstHardwareData.Visible = false;
+            lstSoftwareData.Visible = false;
         }
 
         private void btnSubmitLogin_Click(object sender, EventArgs e)
@@ -223,7 +201,7 @@ namespace CMP307Project
                         btnEdit.Enabled = true;
                         btnLogin.Enabled = false;
                         btnLogin.Text = "Logged in";
-                        flpLogin.Visible = false;
+                        changeVisibility();
 
                         MessageBox.Show("User has successfully logged in!");
                     }
@@ -241,6 +219,44 @@ namespace CMP307Project
                 txtPassword.Clear();
                 MessageBox.Show("Incorrect username or password. Please try again.");
             }
+        }
+
+        private void btnViewSystem_Click(object sender, EventArgs e)
+        {
+            changeVisibility();
+
+            lstSystemData.Visible = true;
+        }
+
+        private void getSystemData()
+        {
+            getHardwareData("Win32_Processor");
+            getHardwareData("Win32_DiskDrive");
+            getHardwareData("Win32_SoundDevice");
+            getHardwareData("Win32_VideoController");
+            getHardwareData("Win32_Keyboard");
+            getHardwareData("Win32_PointingDevice");
+            getHardwareData("Win32_NetworkAdapter");
+        }
+
+        private void getHardwareData(string hwclass)
+        {
+            //  Implemented from https://www.youtube.com/watch?v=rou471Evuzc
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM " + hwclass);
+            foreach (ManagementObject mj in mos.Get())
+            {
+                lstSystemData.Items.Add("Hardware Name: " + Convert.ToString(mj["Name"]));
+                lstSystemData.Items.Add("Hardware Description: " + Convert.ToString(mj["Description"]));
+                lstSystemData.Items.Add("Hardware System Name: " + Convert.ToString(mj["SystemName"]));
+                lstSystemData.Items.Add("");
+            }
+        }
+
+        private void btnViewSoftware_Click(object sender, EventArgs e)
+        {
+            changeVisibility();
+
+            lstSoftwareData.Visible = true;
         }
     }
 }
