@@ -52,7 +52,7 @@ namespace CMP307Project
             Console.WriteLine("\nConnection successfully terminated.");
         }
 
-        private void GetComponent(string hwclass)
+        /*private void GetComponent(string hwclass)
         {
             //  Implemented from https://csharp.hotexamples.com/examples/System.Management/ManagementObjectSearcher/-/php-managementobjectsearcher-class-examples.html
             //  using example #2
@@ -62,7 +62,7 @@ namespace CMP307Project
             {
                 lstViewAutoData.Items.Add((Convert.ToString(mj[syntax])) + "\r\n");
             }*/
-            ManagementObjectSearcher query;
+            /*ManagementObjectSearcher query;
             ManagementObjectCollection queryCollection;
             string sQuery = ("SELECT * FROM " + hwclass);
 
@@ -79,21 +79,9 @@ namespace CMP307Project
                 //lstViewAutoData.Items.Add("DriverName: " + (string)mo["DriverName"]);
                 //lstViewAutoData.Items.Add("PrinterStatus: " + Convert.ToString(mo["PrinterStatus"]));
                 //lstViewAutoData.Items.Add("PrinterState: " + Convert.ToString(mo["PrinterState"]));
-                //lstViewAutoData.Items.Add("Printer Driver " /*+ sDefault*/);
+                //lstViewAutoData.Items.Add("Printer Driver " + sDefault);
             }
-        }
-
-        private void btnViewAutoData_Click(object sender, EventArgs e)
-        {
-            btnViewAutoData.Visible = false;
-            int i = 0;  //  Declares counter initially 0;
-
-            lstViewAutoData.Visible = true;
-
-            //lstViewAutoData.Items.Add("AssNum\tSystem Name\tManufacturer\tType");
-            //GetComponent("Win32_Printer");
-            GetComponent("Win32_VideoController");
-        }
+        }*/
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -102,7 +90,6 @@ namespace CMP307Project
 
         private void btnView_Click(object sender, EventArgs e)
         {
-            lstViewAutoData.Visible = false;
             flpInsertAsset.Visible = false; //  Ensures that the form is closed if it isn't already
             lstView.Visible = true; //  Shows the list box containing all the data from the database
         }
@@ -201,39 +188,43 @@ namespace CMP307Project
         {
             string username = txtUsername.Text.ToString();
             string password = txtPassword.Text.ToString();
-            string userPass = "";
-            int userID = 0;
+            string userPass;
 
             SqlConnection conn;
             string connString = "Data Source = tolmount.abertay.ac.uk; Initial Catalog = mssql2002590; User ID = mssql2002590; Password = huG72W6hwB";
             conn = new SqlConnection(connString);
             conn.Open();
 
-            SqlCommand command;
-            SqlDataReader dataReader;
-            string sql, Output = "";
-
-            sql = "SELECT * FROM SCOT.STAFF WHERE UserName = '" + username + "';";
-            command = new SqlCommand(sql, conn);
-            dataReader = command.ExecuteReader();
+            string query = "SELECT * FROM SCOT.STAFF WHERE UserName = '" + username + "';";
+            SqlCommand  command = new SqlCommand(query, conn);
+            SqlDataReader data = command.ExecuteReader();
 
             if (txtUsername.Text == "" || txtPassword.Text == "")
             {
                 txtUsername.Clear();
                 txtPassword.Clear();
-                MessageBox.Show("Incorrect Password or Username. Please try again.");
+                MessageBox.Show("A username and password must be inputted to log in.");
             }
-            else if (dataReader.HasRows)
+            else if (data.HasRows)
             {
-                while (dataReader.Read())
+                while (data.Read())
                 {
-                    userID = Convert.ToInt32(dataReader[0]);
-                    userPass = Convert.ToString(dataReader[1]);
+                    userPass = Convert.ToString(data[1]);
 
                     if (password == userPass)
                     {
                         txtUsername.Clear();
                         txtPassword.Clear();
+                        btnViewHardware.Enabled = true;
+                        btnViewSoftware.Enabled = true;
+                        btnViewSystem.Enabled = true;
+                        btnAdd.Enabled = true;
+                        btnDelete.Enabled = true;
+                        btnEdit.Enabled = true;
+                        btnLogin.Enabled = false;
+                        btnLogin.Text = "Logged in";
+                        flpLogin.Visible = false;
+
                         MessageBox.Show("User has successfully logged in!");
                     }
                     else
@@ -250,72 +241,6 @@ namespace CMP307Project
                 txtPassword.Clear();
                 MessageBox.Show("Incorrect username or password. Please try again.");
             }
-
-
-
-
-
-            /*string username = txtUsername.Text.ToString();
-            string password = txtPassword.Text.ToString();
-            int userID = 0;
-            string userPass = "";
-
-            if (username != "" && password != "")
-            {
-                //  Select query
-                SqlConnection conn;
-
-                string connString = "Data Source = tolmount.abertay.ac.uk; Initial Catalog = mssql2002590; User ID = mssql2002590; Password = huG72W6hwB";
-
-                conn = new SqlConnection(connString);
-
-                conn.Open();
-                Console.WriteLine("Connection Successfully established.\n");
-                string query = ("SELECT TOP 1 * FROM SCOT.STAFF WHERE UserName = '" + username + "' UserPass = '" + password + "';");
-
-                SqlCommand Command = new SqlCommand(query);
-
-                Command.Connection = conn;
-
-                SqlDataReader data = Command.ExecuteReader();
-                while (data.Read())
-                {
-                    userID = Convert.ToInt32(data[0]);
-                    userPass = Convert.ToString(data[1]);
-                }
-                data.Close();
-
-                MessageBox.Show(userID + userPass);
-
-                if (userID > 0)
-                {
-                    if (password == userPass)
-                    {
-                        txtUsername.Clear();
-                        txtPassword.Clear();
-                        MessageBox.Show("User has successfully logged in.");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Incorrect Password or Username");
-                    }
-                }
-                else
-                {
-                    txtUsername.Clear();
-                    txtPassword.Clear();
-                    MessageBox.Show("Incorrect Password or Username. Please try again.");
-                }
-
-                conn.Close();
-                Console.WriteLine("\nConnection successfully terminated.");
-            }
-            else
-            {
-                txtUsername.Clear();
-                txtPassword.Clear();
-                MessageBox.Show("Username and Password both must be inputted to continue!");                
-            }*/
         }
     }
 }

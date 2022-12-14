@@ -31,7 +31,7 @@ namespace CMP307Project
         {
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
-            this.btnView = new System.Windows.Forms.Button();
+            this.btnViewHardware = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -55,8 +55,6 @@ namespace CMP307Project
             this.flpInsertButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.btnInsertSubmit = new System.Windows.Forms.Button();
             this.btnInsertCancel = new System.Windows.Forms.Button();
-            this.lstViewAutoData = new System.Windows.Forms.ListBox();
-            this.btnViewAutoData = new System.Windows.Forms.Button();
             this.flpLogin = new System.Windows.Forms.FlowLayoutPanel();
             this.lblUsername = new System.Windows.Forms.Label();
             this.txtUsername = new System.Windows.Forms.TextBox();
@@ -65,6 +63,8 @@ namespace CMP307Project
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnSubmitLogin = new System.Windows.Forms.Button();
             this.btnCancelLogin = new System.Windows.Forms.Button();
+            this.btnViewSoftware = new System.Windows.Forms.Button();
+            this.btnViewSystem = new System.Windows.Forms.Button();
             this.flpInsertAsset.SuspendLayout();
             this.flpInsertButtons.SuspendLayout();
             this.flpLogin.SuspendLayout();
@@ -97,25 +97,26 @@ namespace CMP307Project
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
-            // btnView
+            // btnViewHardware
             // 
-            this.btnView.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnView.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold);
-            this.btnView.Location = new System.Drawing.Point(12, 244);
-            this.btnView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnView.Name = "btnView";
-            this.btnView.Size = new System.Drawing.Size(248, 139);
-            this.btnView.TabIndex = 2;
-            this.btnView.Text = "View DB Data";
-            this.btnView.UseVisualStyleBackColor = true;
-            this.btnView.Click += new System.EventHandler(this.btnView_Click);
+            this.btnViewHardware.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btnViewHardware.Enabled = false;
+            this.btnViewHardware.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold);
+            this.btnViewHardware.Location = new System.Drawing.Point(12, 197);
+            this.btnViewHardware.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnViewHardware.Name = "btnViewHardware";
+            this.btnViewHardware.Size = new System.Drawing.Size(248, 148);
+            this.btnViewHardware.TabIndex = 2;
+            this.btnViewHardware.Text = "View Hardware Data";
+            this.btnViewHardware.UseVisualStyleBackColor = true;
+            this.btnViewHardware.Click += new System.EventHandler(this.btnView_Click);
             // 
             // btnEdit
             // 
-            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnEdit.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnEdit.Enabled = false;
             this.btnEdit.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold);
-            this.btnEdit.Location = new System.Drawing.Point(12, 478);
+            this.btnEdit.Location = new System.Drawing.Point(1177, 358);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(248, 139);
@@ -125,10 +126,10 @@ namespace CMP307Project
             // 
             // btnDelete
             // 
-            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelete.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnDelete.Enabled = false;
             this.btnDelete.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold);
-            this.btnDelete.Location = new System.Drawing.Point(1177, 478);
+            this.btnDelete.Location = new System.Drawing.Point(1177, 514);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(248, 139);
@@ -139,8 +140,9 @@ namespace CMP307Project
             // btnAdd
             // 
             this.btnAdd.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnAdd.Enabled = false;
             this.btnAdd.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold);
-            this.btnAdd.Location = new System.Drawing.Point(1177, 244);
+            this.btnAdd.Location = new System.Drawing.Point(1177, 202);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(248, 139);
@@ -202,7 +204,7 @@ namespace CMP307Project
             this.flpInsertAsset.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpInsertAsset.Location = new System.Drawing.Point(453, 149);
             this.flpInsertAsset.Name = "flpInsertAsset";
-            this.flpInsertAsset.Size = new System.Drawing.Size(519, 806);
+            this.flpInsertAsset.Size = new System.Drawing.Size(504, 544);
             this.flpInsertAsset.TabIndex = 8;
             this.flpInsertAsset.Visible = false;
             // 
@@ -363,36 +365,6 @@ namespace CMP307Project
             this.btnInsertCancel.UseVisualStyleBackColor = true;
             this.btnInsertCancel.Click += new System.EventHandler(this.btnInsertCancel_Click);
             // 
-            // lstViewAutoData
-            // 
-            this.lstViewAutoData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lstViewAutoData.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lstViewAutoData.FormattingEnabled = true;
-            this.lstViewAutoData.ItemHeight = 19;
-            this.lstViewAutoData.Location = new System.Drawing.Point(294, 197);
-            this.lstViewAutoData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.lstViewAutoData.Name = "lstViewAutoData";
-            this.lstViewAutoData.Size = new System.Drawing.Size(846, 460);
-            this.lstViewAutoData.TabIndex = 9;
-            this.lstViewAutoData.Visible = false;
-            // 
-            // btnViewAutoData
-            // 
-            this.btnViewAutoData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnViewAutoData.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold);
-            this.btnViewAutoData.Location = new System.Drawing.Point(614, 288);
-            this.btnViewAutoData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnViewAutoData.Name = "btnViewAutoData";
-            this.btnViewAutoData.Size = new System.Drawing.Size(248, 139);
-            this.btnViewAutoData.TabIndex = 10;
-            this.btnViewAutoData.Text = "View Auto Data";
-            this.btnViewAutoData.UseVisualStyleBackColor = true;
-            this.btnViewAutoData.Click += new System.EventHandler(this.btnViewAutoData_Click);
-            // 
             // flpLogin
             // 
             this.flpLogin.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -476,24 +448,50 @@ namespace CMP307Project
             this.btnCancelLogin.UseVisualStyleBackColor = true;
             this.btnCancelLogin.Click += new System.EventHandler(this.btnCancelLogin_Click);
             // 
+            // btnViewSoftware
+            // 
+            this.btnViewSoftware.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btnViewSoftware.Enabled = false;
+            this.btnViewSoftware.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold);
+            this.btnViewSoftware.Location = new System.Drawing.Point(12, 353);
+            this.btnViewSoftware.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnViewSoftware.Name = "btnViewSoftware";
+            this.btnViewSoftware.Size = new System.Drawing.Size(248, 148);
+            this.btnViewSoftware.TabIndex = 12;
+            this.btnViewSoftware.Text = "View Software Data";
+            this.btnViewSoftware.UseVisualStyleBackColor = true;
+            // 
+            // btnViewSystem
+            // 
+            this.btnViewSystem.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btnViewSystem.Enabled = false;
+            this.btnViewSystem.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold);
+            this.btnViewSystem.Location = new System.Drawing.Point(12, 509);
+            this.btnViewSystem.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnViewSystem.Name = "btnViewSystem";
+            this.btnViewSystem.Size = new System.Drawing.Size(248, 148);
+            this.btnViewSystem.TabIndex = 13;
+            this.btnViewSystem.Text = "View System Data";
+            this.btnViewSystem.UseVisualStyleBackColor = true;
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(1477, 714);
+            this.Controls.Add(this.btnViewSystem);
+            this.Controls.Add(this.btnEdit);
+            this.Controls.Add(this.btnViewSoftware);
             this.Controls.Add(this.flpLogin);
-            this.Controls.Add(this.btnViewAutoData);
-            this.Controls.Add(this.lstViewAutoData);
-            this.Controls.Add(this.flpInsertAsset);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lstView);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.btnEdit);
-            this.Controls.Add(this.btnView);
+            this.Controls.Add(this.btnViewHardware);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.lblTitle);
+            this.Controls.Add(this.flpInsertAsset);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Home";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -514,7 +512,7 @@ namespace CMP307Project
 
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button btnLogin;
-        private System.Windows.Forms.Button btnView;
+        private System.Windows.Forms.Button btnViewHardware;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;
@@ -538,8 +536,6 @@ namespace CMP307Project
         private System.Windows.Forms.FlowLayoutPanel flpInsertButtons;
         private System.Windows.Forms.Button btnInsertSubmit;
         private System.Windows.Forms.Button btnInsertCancel;
-        private System.Windows.Forms.ListBox lstViewAutoData;
-        private System.Windows.Forms.Button btnViewAutoData;
         private System.Windows.Forms.FlowLayoutPanel flpLogin;
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.TextBox txtUsername;
@@ -548,5 +544,7 @@ namespace CMP307Project
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Button btnSubmitLogin;
         private System.Windows.Forms.Button btnCancelLogin;
+        private System.Windows.Forms.Button btnViewSoftware;
+        private System.Windows.Forms.Button btnViewSystem;
     }
 }
