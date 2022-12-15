@@ -83,7 +83,18 @@ namespace CMP307Project
         private void btnAdd_Click(object sender, EventArgs e)
         {
             changeVisibility();
-            flpAddHardware.Visible = true;  //  Shows the form that allows the user to insert data
+
+            DialogResult AddData = MessageBox.Show("Press Yes to Add Hardware Data, Press No to Add Software Data", "Add Data", MessageBoxButtons.YesNo);
+            if (AddData == DialogResult.Yes)
+            {
+                changeVisibility();
+                flpAddHardware.Visible = true;                
+            }
+            else
+            {
+                changeVisibility();
+                flpAddSoftware.Visible = true;
+            }
         }
 
         private void btnInsertSubmit_Click(object sender, EventArgs e)
@@ -349,6 +360,40 @@ namespace CMP307Project
 
             //  Pop-up alert stating Data was successfully added
             MessageBox.Show("Your data was successfully inputted into the database");
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            changeVisibility();
+
+            DialogResult EditData = MessageBox.Show("Press Yes to Edit Hardware Data, Press No to Edit Software Data", "Edit Data", MessageBoxButtons.YesNo);
+            if (EditData == DialogResult.Yes)
+            {
+                changeVisibility();
+                //flpEditHardware.Visible = true;
+            }
+            else
+            {
+                changeVisibility();
+                //flpEditSoftware.Visible = true;
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            changeVisibility();
+
+            DialogResult EditData = MessageBox.Show("Press Yes to Edit Hardware Data, Press No to Edit Software Data", "Edit Data", MessageBoxButtons.YesNo);
+            if (EditData == DialogResult.Yes)
+            {
+                changeVisibility();
+                //flpEditHardware.Visible = true;
+            }
+            else
+            {
+                changeVisibility();
+                //flpEditSoftware.Visible = true;
+            }
         }
     }
 }

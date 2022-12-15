@@ -140,6 +140,7 @@ namespace CMP307Project
             this.btnEdit.TabIndex = 3;
             this.btnEdit.Text = "Edit Data";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnDelete
             // 
@@ -153,6 +154,7 @@ namespace CMP307Project
             this.btnDelete.TabIndex = 4;
             this.btnDelete.Text = "Delete Data";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnAdd
             // 
@@ -566,6 +568,7 @@ namespace CMP307Project
             this.flpAddSoftware.Name = "flpAddSoftware";
             this.flpAddSoftware.Size = new System.Drawing.Size(502, 308);
             this.flpAddSoftware.TabIndex = 18;
+            this.flpAddSoftware.Visible = false;
             // 
             // lblOSName
             // 
