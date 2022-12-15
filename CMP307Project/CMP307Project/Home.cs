@@ -216,6 +216,10 @@ namespace CMP307Project
             lstSoftwareData.Visible = false;
             flpSystemData.Visible = false;
             flpAddSoftware.Visible = false;
+            flpEditHardware.Visible = false;
+            flpEditSoftware.Visible = false;
+            flpDelSW.Visible = false;
+            flpDelHW.Visible = false;
         }
 
         private void btnSubmitLogin_Click(object sender, EventArgs e)
@@ -280,6 +284,7 @@ namespace CMP307Project
         private void btnViewSystem_Click(object sender, EventArgs e)
         {
             changeVisibility();
+            InsertData();
 
             flpSystemData.Visible = true;
             lstSystemHardware.Visible = true;
@@ -331,6 +336,7 @@ namespace CMP307Project
         private void btnViewSoftware_Click(object sender, EventArgs e)
         {
             changeVisibility();
+            InsertData();
 
             lstSoftwareData.Visible = true;
         }
@@ -397,28 +403,181 @@ namespace CMP307Project
             if (AddData == DialogResult.Yes)
             {
                 changeVisibility();
+                txtEditHWAN.Clear();
+                txtEditHWField.Clear();
+                txtEditHWDataInput.Enabled = false;
+                txtEditHWDataInput.Clear();
                 flpEditHardware.Visible = true;
             }
             else
             {
                 changeVisibility();
-                //flpEditSoftware.Visible = true;
+                txtEditSWAN.Clear();
+                txtEditSWField.Clear();
+                txtEditSWDataInput.Enabled = false;
+                txtEditSWDataInput.Clear();
+                flpEditSoftware.Visible = true;
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            changeVisibility();
+
+            DialogResult AddData = MessageBox.Show("Press Yes to Delete Hardware Data, Press No to Delete Software Data", "Delete Data", MessageBoxButtons.YesNo);
+            if (AddData == DialogResult.Yes)
+            {
+                changeVisibility();
+                txtDelHWAN.Clear();
+                flpDelHW.Visible = true;
+            }
+            else
+            {
+                changeVisibility();
+                txtDelSWAN.Clear();
+                flpDelSW.Visible = true;
+            }
 
         }
 
         private void btnEditHWCancel_Click(object sender, EventArgs e)
         {
-
+            //  Hides form after cancel button has been pressed
+            flpEditHardware.Visible = false;
         }
 
         private void btnEditHWSubmit_Click(object sender, EventArgs e)
         {
+            int EditHWAN = int.Parse(txtEditHWAN.Text);
+            string EditHWDataInput = txtEditHWDataInput.Text.ToString();
+            string EditHWField = txtEditHWField.Text.ToString();
 
+            SqlConnection conn;
+            string connString = "Data Source = tolmount.abertay.ac.uk; Initial Catalog = mssql2002590; User ID = mssql2002590; Password = huG72W6hwB";
+            conn = new SqlConnection(connString);
+
+            conn.Open();
+            Console.WriteLine("Connection Successfully established.\n");
+
+            string query = "UPDATE SCOT.HARDWARE SET Model = '" + EditHWDataInput + "' WHERE AssetNum = '" + EditHWAN + "';";
+            SqlCommand Command = new SqlCommand(query);
+            Command.Connection = conn;
+
+            MessageBox.Show("Hardware table updated successfully!");
+
+            int result = Command.ExecuteNonQuery();
+            
+            conn.Close();
+            Console.WriteLine("\nConnection successfully terminated.");
+
+            changeVisibility();
+        }
+
+        private void btnbtnEditHWSubmitFields_Click(object sender, EventArgs e)
+        {
+            txtEditHWDataInput.Enabled = true;
+        }
+
+        private void btnEditSWFieldSubmit_Click(object sender, EventArgs e)
+        {
+            txtEditSWDataInput.Enabled = true;
+
+        }
+
+        private void btnEditSWSubmit_Click(object sender, EventArgs e)
+        {
+            int EditSWAN = int.Parse(txtEditSWAN.Text);
+            string EditSWDataInput = txtEditSWDataInput.Text.ToString();
+            string EditSWField = txtEditSWField.Text.ToString();
+
+            SqlConnection conn;
+            string connString = "Data Source = tolmount.abertay.ac.uk; Initial Catalog = mssql2002590; User ID = mssql2002590; Password = huG72W6hwB";
+            conn = new SqlConnection(connString);
+
+            conn.Open();
+            Console.WriteLine("Connection Successfully established.\n");
+
+            string query = "UPDATE SCOT.SOFTWARE SET Manufacturer = '" + EditSWDataInput + "' WHERE AssetNum = '" + EditSWAN + "';";
+            SqlCommand Command = new SqlCommand(query);
+            Command.Connection = conn;
+
+            MessageBox.Show("Software table updated successfully!");
+
+            int result = Command.ExecuteNonQuery();
+
+            conn.Close();
+            Console.WriteLine("\nConnection successfully terminated.");
+
+            changeVisibility();
+
+        }
+
+        private void btnEditSWCancel_Click(object sender, EventArgs e)
+        {
+            //  Hides form after cancel button has been pressed
+            flpEditSoftware.Visible = false;
+        }
+
+        //  btnDelHWSubmit_Click
+        private void btnDelSWSubmit_Click(object sender, EventArgs e)
+        {
+            int DelHWAN = int.Parse(txtDelHWAN.Text);
+
+            SqlConnection conn;
+            string connString = "Data Source = tolmount.abertay.ac.uk; Initial Catalog = mssql2002590; User ID = mssql2002590; Password = huG72W6hwB";
+            conn = new SqlConnection(connString);
+
+            conn.Open();
+            Console.WriteLine("Connection Successfully established.\n");
+
+            string query = "DELETE FROM SCOT.HARDWARE WHERE AssetNum = '" + DelHWAN + "';";
+            SqlCommand Command = new SqlCommand(query);
+            Command.Connection = conn;
+
+            MessageBox.Show("Software table updated successfully!");
+
+            int result = Command.ExecuteNonQuery();
+
+            conn.Close();
+            Console.WriteLine("\nConnection successfully terminated.");
+
+            changeVisibility();
+        }
+
+        //  btnDeleteSWData
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int DelSWAN = int.Parse(txtDelSWAN.Text);
+
+            SqlConnection conn;
+            string connString = "Data Source = tolmount.abertay.ac.uk; Initial Catalog = mssql2002590; User ID = mssql2002590; Password = huG72W6hwB";
+            conn = new SqlConnection(connString);
+
+            conn.Open();
+            Console.WriteLine("Connection Successfully established.\n");
+
+            string query = "DELETE FROM SCOT.SOFTWARE WHERE AssetNum = '" + DelSWAN + "';";
+            SqlCommand Command = new SqlCommand(query);
+            Command.Connection = conn;
+
+            MessageBox.Show("Software table updated successfully!");
+
+            int result = Command.ExecuteNonQuery();
+
+            conn.Close();
+            Console.WriteLine("\nConnection successfully terminated.");
+
+            changeVisibility();
+        }
+
+        private void btnDelSWCancel_Click(object sender, EventArgs e)
+        {
+            flpDelSW.Visible = false;
+        }
+
+        private void btnDelHWCancel_Click(object sender, EventArgs e)
+        {
+            flpDelHW.Visible = false;
         }
     }
 }
