@@ -35,7 +35,7 @@ namespace CMP307Project
 
             conn.Open();
             Console.WriteLine("Connection Successfully established.\n");
-            string query = "SELECT * FROM dbo.ASSETS";
+            string query = "SELECT * FROM SCOT.HARDWARE";
 
             SqlCommand Command = new SqlCommand(query);
 
@@ -49,6 +49,21 @@ namespace CMP307Project
                 lstHardwareData.Items.Add(data[0] + "\t" + data[1] + "\t" + data[2] + "\t" + data[3] + "\t" + data[4] + "\t" + data[5] + "\t" + data[6] + "\t" + data[7]);
             }
             data.Close();
+
+            string SWQuery = "SELECT * FROM SCOT.HARDWARE";
+
+            SqlCommand Comm = new SqlCommand(SWQuery);
+
+            Comm.Connection = conn;
+
+            SqlDataReader SWData = Comm.ExecuteReader();
+            lstSoftwareData.Items.Add("AssNum\tOS Name\tVersion\tManufacturer");
+            while (SWData.Read())
+            {
+                //  Inserts data into the list box lstView
+                lstHardwareData.Items.Add(data[0] + "\t" + data[1] + "\t" + data[2] + "\t" + data[3]);
+            }
+            SWData.Close();
 
             conn.Close();
             Console.WriteLine("\nConnection successfully terminated.");
@@ -68,7 +83,7 @@ namespace CMP307Project
         private void btnAdd_Click(object sender, EventArgs e)
         {
             changeVisibility();
-            flpInsertAsset.Visible = true;  //  Shows the form that allows the user to insert data
+            flpAddHardware.Visible = true;  //  Shows the form that allows the user to insert data
         }
 
         private void btnInsertSubmit_Click(object sender, EventArgs e)
@@ -157,11 +172,12 @@ namespace CMP307Project
         private void changeVisibility()
         {
             flpLogin.Visible = false;
-            flpInsertAsset.Visible = false;
+            flpAddHardware.Visible = false;
             lstSystemHardware.Visible = false;
             lstHardwareData.Visible = false;
             lstSoftwareData.Visible = false;
             flpSystemData.Visible = false;
+            flpAddSoftware.Visible = false;
         }
 
         private void btnSubmitLogin_Click(object sender, EventArgs e)
@@ -234,7 +250,6 @@ namespace CMP307Project
 
         private void getSystemData()
         {
-
             getHardwareData("Win32_Processor");
             getHardwareData("Win32_DiskDrive");
             getHardwareData("Win32_SoundDevice");
@@ -244,6 +259,9 @@ namespace CMP307Project
             getHardwareData("Win32_NetworkAdapter");
 
             getSoftwareData("Win32_ComputerSystem");
+            getSoftwareData("Win32_OperatingSystem");
+            getSoftwareData("Win32_Registry");
+            getSoftwareData("Win32_Service");
         }
 
         private void getHardwareData(string hwclass)
@@ -267,7 +285,7 @@ namespace CMP307Project
             {
                 lstSystemSoftware.Items.Add("Software Name: " + Convert.ToString(mj["Name"]));
                 lstSystemSoftware.Items.Add("Software Description: " + Convert.ToString(mj["Description"]));
-                lstSystemSoftware.Items.Add("Software System Type: " + Convert.ToString(mj["SystemType"]));
+                lstSystemSoftware.Items.Add("Software Status: " + Convert.ToString(mj["Status"]));
                 lstSystemSoftware.Items.Add("");
             }
         }
@@ -277,6 +295,60 @@ namespace CMP307Project
             changeVisibility();
 
             lstSoftwareData.Visible = true;
+        }
+
+        private void btnCancelSoftware_Click(object sender, EventArgs e)
+        {
+            txtSWOSName.Clear();
+            txtSWVersion.Clear();
+            txtSWManufacturer.Clear();
+
+            changeVisibility();
+        }
+
+        private void btnSubmitSoftware_Click(object sender, EventArgs e)
+        {
+            //  Declares local variables with user text input
+            string InsertSWOSName = txtSWOSName.Text.ToString();
+            string InsertSWVersion = txtSWVersion.Text.ToString();
+            string InsertSWManufacturer = txtSWManufacturer.Text.ToString();
+
+            //  Insert query
+            SqlConnection conn;
+
+            string connString = "Data Source = tolmount.abertay.ac.uk; Initial Catalog = mssql2002590; User ID = mssql2002590; Password = huG72W6hwB";
+
+            conn = new SqlConnection(connString);
+
+            conn.Open();
+            Console.WriteLine("Connection successfully established.\n");
+
+            string insertQuery = "INSERT INTO SCOT.SOFTWARE (SystemName, SystemVersion, Manufacturer) VALUES " +
+                "('" + InsertSWOSName + "', '" + InsertSWVersion + "', '" + InsertSWManufacturer + "');";
+
+            SqlCommand Insertcommand = new SqlCommand(insertQuery, conn);
+            int n = Insertcommand.ExecuteNonQuery();
+            Console.WriteLine(n + " rows affected");
+
+            conn.Close();
+            Console.WriteLine("\nConnection successfully terminated.");
+
+            //  Clears all text boxes after data has been submitted
+            txtSWOSName.Clear();
+            txtSWManufacturer.Clear();
+            txtSWVersion.Clear();
+
+            changeVisibility();
+
+            //  Clears the list box lstView, ready to receive the new data
+            lstSystemSoftware.Items.Clear();
+
+            //  Runs the insert data function again so that the
+            //  new data will be present in the list box when viewed
+            InsertData();
+
+            //  Pop-up alert stating Data was successfully added
+            MessageBox.Show("Your data was successfully inputted into the database");
         }
     }
 }

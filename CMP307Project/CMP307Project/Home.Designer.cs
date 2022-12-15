@@ -37,7 +37,7 @@ namespace CMP307Project
             this.btnAdd = new System.Windows.Forms.Button();
             this.lstSystemHardware = new System.Windows.Forms.ListBox();
             this.btnClose = new System.Windows.Forms.Button();
-            this.flpInsertAsset = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpAddHardware = new System.Windows.Forms.FlowLayoutPanel();
             this.lblInsertSysName = new System.Windows.Forms.Label();
             this.txtInsertSysName = new System.Windows.Forms.TextBox();
             this.lblInsertModel = new System.Windows.Forms.Label();
@@ -53,8 +53,8 @@ namespace CMP307Project
             this.lblInsertNotes = new System.Windows.Forms.Label();
             this.txtInsertNotes = new System.Windows.Forms.TextBox();
             this.flpInsertButtons = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnInsertSubmit = new System.Windows.Forms.Button();
-            this.btnInsertCancel = new System.Windows.Forms.Button();
+            this.btnSubmitHardware = new System.Windows.Forms.Button();
+            this.btnCancelHardware = new System.Windows.Forms.Button();
             this.flpLogin = new System.Windows.Forms.FlowLayoutPanel();
             this.lblUsername = new System.Windows.Forms.Label();
             this.txtUsername = new System.Windows.Forms.TextBox();
@@ -69,11 +69,23 @@ namespace CMP307Project
             this.lstSoftwareData = new System.Windows.Forms.ListBox();
             this.lstSystemSoftware = new System.Windows.Forms.ListBox();
             this.flpSystemData = new System.Windows.Forms.FlowLayoutPanel();
-            this.flpInsertAsset.SuspendLayout();
+            this.flpAddSoftware = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblOSName = new System.Windows.Forms.Label();
+            this.txtSWOSName = new System.Windows.Forms.TextBox();
+            this.lblVersion = new System.Windows.Forms.Label();
+            this.txtSWVersion = new System.Windows.Forms.TextBox();
+            this.lblSoftwareManu = new System.Windows.Forms.Label();
+            this.txtSWManufacturer = new System.Windows.Forms.TextBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnSubmitSoftware = new System.Windows.Forms.Button();
+            this.btnCancelSoftware = new System.Windows.Forms.Button();
+            this.flpAddHardware.SuspendLayout();
             this.flpInsertButtons.SuspendLayout();
             this.flpLogin.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flpSystemData.SuspendLayout();
+            this.flpAddSoftware.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -184,33 +196,33 @@ namespace CMP307Project
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // flpInsertAsset
+            // flpAddHardware
             // 
-            this.flpInsertAsset.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.flpInsertAsset.AutoSize = true;
-            this.flpInsertAsset.BackColor = System.Drawing.Color.White;
-            this.flpInsertAsset.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flpInsertAsset.Controls.Add(this.lblInsertSysName);
-            this.flpInsertAsset.Controls.Add(this.txtInsertSysName);
-            this.flpInsertAsset.Controls.Add(this.lblInsertModel);
-            this.flpInsertAsset.Controls.Add(this.txtInsertModel);
-            this.flpInsertAsset.Controls.Add(this.lblInsertManufacturer);
-            this.flpInsertAsset.Controls.Add(this.txtInsertManufacturer);
-            this.flpInsertAsset.Controls.Add(this.lblInsertAssType);
-            this.flpInsertAsset.Controls.Add(this.txtInsertAssType);
-            this.flpInsertAsset.Controls.Add(this.lblInsertIPAddr);
-            this.flpInsertAsset.Controls.Add(this.txtInsertIPAddr);
-            this.flpInsertAsset.Controls.Add(this.lblInsertPurchDate);
-            this.flpInsertAsset.Controls.Add(this.txtInsertPurchDate);
-            this.flpInsertAsset.Controls.Add(this.lblInsertNotes);
-            this.flpInsertAsset.Controls.Add(this.txtInsertNotes);
-            this.flpInsertAsset.Controls.Add(this.flpInsertButtons);
-            this.flpInsertAsset.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flpInsertAsset.Location = new System.Drawing.Point(453, 149);
-            this.flpInsertAsset.Name = "flpInsertAsset";
-            this.flpInsertAsset.Size = new System.Drawing.Size(504, 544);
-            this.flpInsertAsset.TabIndex = 8;
-            this.flpInsertAsset.Visible = false;
+            this.flpAddHardware.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.flpAddHardware.AutoSize = true;
+            this.flpAddHardware.BackColor = System.Drawing.Color.White;
+            this.flpAddHardware.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flpAddHardware.Controls.Add(this.lblInsertSysName);
+            this.flpAddHardware.Controls.Add(this.txtInsertSysName);
+            this.flpAddHardware.Controls.Add(this.lblInsertModel);
+            this.flpAddHardware.Controls.Add(this.txtInsertModel);
+            this.flpAddHardware.Controls.Add(this.lblInsertManufacturer);
+            this.flpAddHardware.Controls.Add(this.txtInsertManufacturer);
+            this.flpAddHardware.Controls.Add(this.lblInsertAssType);
+            this.flpAddHardware.Controls.Add(this.txtInsertAssType);
+            this.flpAddHardware.Controls.Add(this.lblInsertIPAddr);
+            this.flpAddHardware.Controls.Add(this.txtInsertIPAddr);
+            this.flpAddHardware.Controls.Add(this.lblInsertPurchDate);
+            this.flpAddHardware.Controls.Add(this.txtInsertPurchDate);
+            this.flpAddHardware.Controls.Add(this.lblInsertNotes);
+            this.flpAddHardware.Controls.Add(this.txtInsertNotes);
+            this.flpAddHardware.Controls.Add(this.flpInsertButtons);
+            this.flpAddHardware.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flpAddHardware.Location = new System.Drawing.Point(453, 149);
+            this.flpAddHardware.Name = "flpAddHardware";
+            this.flpAddHardware.Size = new System.Drawing.Size(504, 544);
+            this.flpAddHardware.TabIndex = 8;
+            this.flpAddHardware.Visible = false;
             // 
             // lblInsertSysName
             // 
@@ -340,34 +352,34 @@ namespace CMP307Project
             // 
             // flpInsertButtons
             // 
-            this.flpInsertButtons.Controls.Add(this.btnInsertSubmit);
-            this.flpInsertButtons.Controls.Add(this.btnInsertCancel);
+            this.flpInsertButtons.Controls.Add(this.btnSubmitHardware);
+            this.flpInsertButtons.Controls.Add(this.btnCancelHardware);
             this.flpInsertButtons.Location = new System.Drawing.Point(3, 416);
             this.flpInsertButtons.Name = "flpInsertButtons";
             this.flpInsertButtons.Size = new System.Drawing.Size(494, 123);
             this.flpInsertButtons.TabIndex = 14;
             // 
-            // btnInsertSubmit
+            // btnSubmitHardware
             // 
-            this.btnInsertSubmit.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInsertSubmit.Location = new System.Drawing.Point(3, 3);
-            this.btnInsertSubmit.Name = "btnInsertSubmit";
-            this.btnInsertSubmit.Size = new System.Drawing.Size(242, 120);
-            this.btnInsertSubmit.TabIndex = 0;
-            this.btnInsertSubmit.Text = "Submit";
-            this.btnInsertSubmit.UseVisualStyleBackColor = true;
-            this.btnInsertSubmit.Click += new System.EventHandler(this.btnInsertSubmit_Click);
+            this.btnSubmitHardware.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubmitHardware.Location = new System.Drawing.Point(3, 3);
+            this.btnSubmitHardware.Name = "btnSubmitHardware";
+            this.btnSubmitHardware.Size = new System.Drawing.Size(242, 120);
+            this.btnSubmitHardware.TabIndex = 0;
+            this.btnSubmitHardware.Text = "Submit";
+            this.btnSubmitHardware.UseVisualStyleBackColor = true;
+            this.btnSubmitHardware.Click += new System.EventHandler(this.btnInsertSubmit_Click);
             // 
-            // btnInsertCancel
+            // btnCancelHardware
             // 
-            this.btnInsertCancel.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInsertCancel.Location = new System.Drawing.Point(251, 3);
-            this.btnInsertCancel.Name = "btnInsertCancel";
-            this.btnInsertCancel.Size = new System.Drawing.Size(240, 120);
-            this.btnInsertCancel.TabIndex = 1;
-            this.btnInsertCancel.Text = "Cancel";
-            this.btnInsertCancel.UseVisualStyleBackColor = true;
-            this.btnInsertCancel.Click += new System.EventHandler(this.btnInsertCancel_Click);
+            this.btnCancelHardware.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelHardware.Location = new System.Drawing.Point(251, 3);
+            this.btnCancelHardware.Name = "btnCancelHardware";
+            this.btnCancelHardware.Size = new System.Drawing.Size(240, 120);
+            this.btnCancelHardware.TabIndex = 1;
+            this.btnCancelHardware.Text = "Cancel";
+            this.btnCancelHardware.UseVisualStyleBackColor = true;
+            this.btnCancelHardware.Click += new System.EventHandler(this.btnInsertCancel_Click);
             // 
             // flpLogin
             // 
@@ -536,12 +548,118 @@ namespace CMP307Project
             this.flpSystemData.TabIndex = 17;
             this.flpSystemData.Visible = false;
             // 
+            // flpAddSoftware
+            // 
+            this.flpAddSoftware.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.flpAddSoftware.AutoSize = true;
+            this.flpAddSoftware.BackColor = System.Drawing.Color.White;
+            this.flpAddSoftware.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flpAddSoftware.Controls.Add(this.lblOSName);
+            this.flpAddSoftware.Controls.Add(this.txtSWOSName);
+            this.flpAddSoftware.Controls.Add(this.lblVersion);
+            this.flpAddSoftware.Controls.Add(this.txtSWVersion);
+            this.flpAddSoftware.Controls.Add(this.lblSoftwareManu);
+            this.flpAddSoftware.Controls.Add(this.txtSWManufacturer);
+            this.flpAddSoftware.Controls.Add(this.flowLayoutPanel1);
+            this.flpAddSoftware.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flpAddSoftware.Location = new System.Drawing.Point(454, 281);
+            this.flpAddSoftware.Name = "flpAddSoftware";
+            this.flpAddSoftware.Size = new System.Drawing.Size(502, 308);
+            this.flpAddSoftware.TabIndex = 18;
+            // 
+            // lblOSName
+            // 
+            this.lblOSName.AutoSize = true;
+            this.lblOSName.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOSName.Location = new System.Drawing.Point(3, 0);
+            this.lblOSName.Name = "lblOSName";
+            this.lblOSName.Size = new System.Drawing.Size(435, 23);
+            this.lblOSName.TabIndex = 0;
+            this.lblOSName.Text = "Enter the Operating System Name (REQUIRED)";
+            // 
+            // txtSWOSName
+            // 
+            this.txtSWOSName.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtSWOSName.Location = new System.Drawing.Point(3, 26);
+            this.txtSWOSName.Name = "txtSWOSName";
+            this.txtSWOSName.Size = new System.Drawing.Size(494, 30);
+            this.txtSWOSName.TabIndex = 1;
+            // 
+            // lblVersion
+            // 
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.Font = new System.Drawing.Font("Arial", 12F);
+            this.lblVersion.Location = new System.Drawing.Point(3, 59);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(284, 23);
+            this.lblVersion.TabIndex = 2;
+            this.lblVersion.Text = "Enter the Version (REQUIRED)";
+            // 
+            // txtSWVersion
+            // 
+            this.txtSWVersion.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtSWVersion.Location = new System.Drawing.Point(3, 85);
+            this.txtSWVersion.Name = "txtSWVersion";
+            this.txtSWVersion.Size = new System.Drawing.Size(494, 30);
+            this.txtSWVersion.TabIndex = 3;
+            // 
+            // lblSoftwareManu
+            // 
+            this.lblSoftwareManu.AutoSize = true;
+            this.lblSoftwareManu.Font = new System.Drawing.Font("Arial", 12F);
+            this.lblSoftwareManu.Location = new System.Drawing.Point(3, 118);
+            this.lblSoftwareManu.Name = "lblSoftwareManu";
+            this.lblSoftwareManu.Size = new System.Drawing.Size(335, 23);
+            this.lblSoftwareManu.TabIndex = 4;
+            this.lblSoftwareManu.Text = "Enter the Manufacturer (REQUIRED)";
+            // 
+            // txtSWManufacturer
+            // 
+            this.txtSWManufacturer.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtSWManufacturer.Location = new System.Drawing.Point(3, 144);
+            this.txtSWManufacturer.Name = "txtSWManufacturer";
+            this.txtSWManufacturer.Size = new System.Drawing.Size(494, 30);
+            this.txtSWManufacturer.TabIndex = 5;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.btnSubmitSoftware);
+            this.flowLayoutPanel1.Controls.Add(this.btnCancelSoftware);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 180);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(494, 123);
+            this.flowLayoutPanel1.TabIndex = 14;
+            // 
+            // btnSubmitSoftware
+            // 
+            this.btnSubmitSoftware.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubmitSoftware.Location = new System.Drawing.Point(3, 3);
+            this.btnSubmitSoftware.Name = "btnSubmitSoftware";
+            this.btnSubmitSoftware.Size = new System.Drawing.Size(242, 120);
+            this.btnSubmitSoftware.TabIndex = 0;
+            this.btnSubmitSoftware.Text = "Submit";
+            this.btnSubmitSoftware.UseVisualStyleBackColor = true;
+            this.btnSubmitSoftware.Click += new System.EventHandler(this.btnSubmitSoftware_Click);
+            // 
+            // btnCancelSoftware
+            // 
+            this.btnCancelSoftware.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelSoftware.Location = new System.Drawing.Point(251, 3);
+            this.btnCancelSoftware.Name = "btnCancelSoftware";
+            this.btnCancelSoftware.Size = new System.Drawing.Size(240, 120);
+            this.btnCancelSoftware.TabIndex = 1;
+            this.btnCancelSoftware.Text = "Cancel";
+            this.btnCancelSoftware.UseVisualStyleBackColor = true;
+            this.btnCancelSoftware.Click += new System.EventHandler(this.btnCancelSoftware_Click);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(1477, 714);
+            this.Controls.Add(this.flpAddSoftware);
+            this.Controls.Add(this.flpAddHardware);
             this.Controls.Add(this.flpSystemData);
             this.Controls.Add(this.lstSoftwareData);
             this.Controls.Add(this.lstHardwareData);
@@ -555,19 +673,21 @@ namespace CMP307Project
             this.Controls.Add(this.btnViewHardware);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.lblTitle);
-            this.Controls.Add(this.flpInsertAsset);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Home";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Home";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.flpInsertAsset.ResumeLayout(false);
-            this.flpInsertAsset.PerformLayout();
+            this.flpAddHardware.ResumeLayout(false);
+            this.flpAddHardware.PerformLayout();
             this.flpInsertButtons.ResumeLayout(false);
             this.flpLogin.ResumeLayout(false);
             this.flpLogin.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flpSystemData.ResumeLayout(false);
+            this.flpAddSoftware.ResumeLayout(false);
+            this.flpAddSoftware.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -583,7 +703,7 @@ namespace CMP307Project
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.ListBox lstSystemHardware;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.FlowLayoutPanel flpInsertAsset;
+        private System.Windows.Forms.FlowLayoutPanel flpAddHardware;
         private System.Windows.Forms.Label lblInsertSysName;
         private System.Windows.Forms.TextBox txtInsertSysName;
         private System.Windows.Forms.Label lblInsertModel;
@@ -599,8 +719,8 @@ namespace CMP307Project
         private System.Windows.Forms.Label lblInsertNotes;
         private System.Windows.Forms.TextBox txtInsertNotes;
         private System.Windows.Forms.FlowLayoutPanel flpInsertButtons;
-        private System.Windows.Forms.Button btnInsertSubmit;
-        private System.Windows.Forms.Button btnInsertCancel;
+        private System.Windows.Forms.Button btnSubmitHardware;
+        private System.Windows.Forms.Button btnCancelHardware;
         private System.Windows.Forms.FlowLayoutPanel flpLogin;
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.TextBox txtUsername;
@@ -615,5 +735,15 @@ namespace CMP307Project
         private System.Windows.Forms.ListBox lstSoftwareData;
         private System.Windows.Forms.ListBox lstSystemSoftware;
         private System.Windows.Forms.FlowLayoutPanel flpSystemData;
+        private System.Windows.Forms.FlowLayoutPanel flpAddSoftware;
+        private System.Windows.Forms.Label lblOSName;
+        private System.Windows.Forms.TextBox txtSWOSName;
+        private System.Windows.Forms.Label lblVersion;
+        private System.Windows.Forms.TextBox txtSWVersion;
+        private System.Windows.Forms.Label lblSoftwareManu;
+        private System.Windows.Forms.TextBox txtSWManufacturer;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button btnSubmitSoftware;
+        private System.Windows.Forms.Button btnCancelSoftware;
     }
 }
