@@ -79,6 +79,30 @@ namespace CMP307Project
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnSubmitSoftware = new System.Windows.Forms.Button();
             this.btnCancelSoftware = new System.Windows.Forms.Button();
+            this.flpEditHardware = new System.Windows.Forms.FlowLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtEditHWSN = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtEditHWModel = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtEditHWManufacturer = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtEditHWAT = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtEditHWIP = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtEditHWPD = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtEditHWNotes = new System.Windows.Forms.TextBox();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnEditHWSubmit = new System.Windows.Forms.Button();
+            this.btnEditHWCancel = new System.Windows.Forms.Button();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtEditHWField = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtEditHWAN = new System.Windows.Forms.TextBox();
             this.flpAddHardware.SuspendLayout();
             this.flpInsertButtons.SuspendLayout();
             this.flpLogin.SuspendLayout();
@@ -86,6 +110,9 @@ namespace CMP307Project
             this.flpSystemData.SuspendLayout();
             this.flpAddSoftware.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.flpEditHardware.SuspendLayout();
+            this.flowLayoutPanel4.SuspendLayout();
+            this.flowLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -501,6 +528,7 @@ namespace CMP307Project
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lstHardwareData.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstHardwareData.FormattingEnabled = true;
+            this.lstHardwareData.HorizontalScrollbar = true;
             this.lstHardwareData.ItemHeight = 19;
             this.lstHardwareData.Location = new System.Drawing.Point(294, 202);
             this.lstHardwareData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -516,8 +544,9 @@ namespace CMP307Project
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lstSoftwareData.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstSoftwareData.FormattingEnabled = true;
+            this.lstSoftwareData.HorizontalScrollbar = true;
             this.lstSoftwareData.ItemHeight = 19;
-            this.lstSoftwareData.Location = new System.Drawing.Point(294, 202);
+            this.lstSoftwareData.Location = new System.Drawing.Point(294, 201);
             this.lstSoftwareData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lstSoftwareData.Name = "lstSoftwareData";
             this.lstSoftwareData.Size = new System.Drawing.Size(846, 460);
@@ -544,7 +573,7 @@ namespace CMP307Project
             this.flpSystemData.BackColor = System.Drawing.Color.White;
             this.flpSystemData.Controls.Add(this.lstSystemHardware);
             this.flpSystemData.Controls.Add(this.lstSystemSoftware);
-            this.flpSystemData.Location = new System.Drawing.Point(277, 197);
+            this.flpSystemData.Location = new System.Drawing.Point(277, 201);
             this.flpSystemData.Name = "flpSystemData";
             this.flpSystemData.Size = new System.Drawing.Size(884, 465);
             this.flpSystemData.TabIndex = 17;
@@ -655,12 +684,264 @@ namespace CMP307Project
             this.btnCancelSoftware.UseVisualStyleBackColor = true;
             this.btnCancelSoftware.Click += new System.EventHandler(this.btnCancelSoftware_Click);
             // 
+            // flpEditHardware
+            // 
+            this.flpEditHardware.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.flpEditHardware.AutoSize = true;
+            this.flpEditHardware.BackColor = System.Drawing.Color.White;
+            this.flpEditHardware.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flpEditHardware.Controls.Add(this.label9);
+            this.flpEditHardware.Controls.Add(this.txtEditHWAN);
+            this.flpEditHardware.Controls.Add(this.label8);
+            this.flpEditHardware.Controls.Add(this.flowLayoutPanel3);
+            this.flpEditHardware.Controls.Add(this.label1);
+            this.flpEditHardware.Controls.Add(this.txtEditHWSN);
+            this.flpEditHardware.Controls.Add(this.label2);
+            this.flpEditHardware.Controls.Add(this.txtEditHWModel);
+            this.flpEditHardware.Controls.Add(this.label3);
+            this.flpEditHardware.Controls.Add(this.txtEditHWManufacturer);
+            this.flpEditHardware.Controls.Add(this.label4);
+            this.flpEditHardware.Controls.Add(this.txtEditHWAT);
+            this.flpEditHardware.Controls.Add(this.label5);
+            this.flpEditHardware.Controls.Add(this.txtEditHWIP);
+            this.flpEditHardware.Controls.Add(this.label6);
+            this.flpEditHardware.Controls.Add(this.txtEditHWPD);
+            this.flpEditHardware.Controls.Add(this.label7);
+            this.flpEditHardware.Controls.Add(this.txtEditHWNotes);
+            this.flpEditHardware.Controls.Add(this.flowLayoutPanel4);
+            this.flpEditHardware.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flpEditHardware.Location = new System.Drawing.Point(453, 42);
+            this.flpEditHardware.Name = "flpEditHardware";
+            this.flpEditHardware.Size = new System.Drawing.Size(504, 668);
+            this.flpEditHardware.TabIndex = 19;
+            this.flpEditHardware.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 124);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(219, 23);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Enter the System Name";
+            // 
+            // txtEditHWSN
+            // 
+            this.txtEditHWSN.Enabled = false;
+            this.txtEditHWSN.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtEditHWSN.Location = new System.Drawing.Point(3, 150);
+            this.txtEditHWSN.Name = "txtEditHWSN";
+            this.txtEditHWSN.Size = new System.Drawing.Size(494, 30);
+            this.txtEditHWSN.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial", 12F);
+            this.label2.Location = new System.Drawing.Point(3, 183);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(150, 23);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Enter the Model";
+            // 
+            // txtEditHWModel
+            // 
+            this.txtEditHWModel.Enabled = false;
+            this.txtEditHWModel.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtEditHWModel.Location = new System.Drawing.Point(3, 209);
+            this.txtEditHWModel.Name = "txtEditHWModel";
+            this.txtEditHWModel.Size = new System.Drawing.Size(494, 30);
+            this.txtEditHWModel.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial", 12F);
+            this.label3.Location = new System.Drawing.Point(3, 242);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(212, 23);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Enter the Manufacturer";
+            // 
+            // txtEditHWManufacturer
+            // 
+            this.txtEditHWManufacturer.Enabled = false;
+            this.txtEditHWManufacturer.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtEditHWManufacturer.Location = new System.Drawing.Point(3, 268);
+            this.txtEditHWManufacturer.Name = "txtEditHWManufacturer";
+            this.txtEditHWManufacturer.Size = new System.Drawing.Size(494, 30);
+            this.txtEditHWManufacturer.TabIndex = 5;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 12F);
+            this.label4.Location = new System.Drawing.Point(3, 301);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(194, 23);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Enter the Asset Type";
+            // 
+            // txtEditHWAT
+            // 
+            this.txtEditHWAT.Enabled = false;
+            this.txtEditHWAT.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtEditHWAT.Location = new System.Drawing.Point(3, 327);
+            this.txtEditHWAT.Name = "txtEditHWAT";
+            this.txtEditHWAT.Size = new System.Drawing.Size(494, 30);
+            this.txtEditHWAT.TabIndex = 7;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial", 12F);
+            this.label5.Location = new System.Drawing.Point(3, 360);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(193, 23);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Enter the IP Address";
+            // 
+            // txtEditHWIP
+            // 
+            this.txtEditHWIP.Enabled = false;
+            this.txtEditHWIP.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtEditHWIP.Location = new System.Drawing.Point(3, 386);
+            this.txtEditHWIP.Name = "txtEditHWIP";
+            this.txtEditHWIP.Size = new System.Drawing.Size(494, 30);
+            this.txtEditHWIP.TabIndex = 9;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Arial", 12F);
+            this.label6.Location = new System.Drawing.Point(3, 419);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(445, 23);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Enter the Purchase Date (Format YYYY-MM-DD)";
+            // 
+            // txtEditHWPD
+            // 
+            this.txtEditHWPD.Enabled = false;
+            this.txtEditHWPD.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtEditHWPD.Location = new System.Drawing.Point(3, 445);
+            this.txtEditHWPD.Name = "txtEditHWPD";
+            this.txtEditHWPD.Size = new System.Drawing.Size(494, 30);
+            this.txtEditHWPD.TabIndex = 11;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Arial", 12F);
+            this.label7.Location = new System.Drawing.Point(3, 478);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(148, 23);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "Enter any notes";
+            // 
+            // txtEditHWNotes
+            // 
+            this.txtEditHWNotes.Enabled = false;
+            this.txtEditHWNotes.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtEditHWNotes.Location = new System.Drawing.Point(3, 504);
+            this.txtEditHWNotes.Name = "txtEditHWNotes";
+            this.txtEditHWNotes.Size = new System.Drawing.Size(494, 30);
+            this.txtEditHWNotes.TabIndex = 13;
+            // 
+            // flowLayoutPanel4
+            // 
+            this.flowLayoutPanel4.Controls.Add(this.btnEditHWSubmit);
+            this.flowLayoutPanel4.Controls.Add(this.btnEditHWCancel);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 540);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(494, 123);
+            this.flowLayoutPanel4.TabIndex = 14;
+            // 
+            // btnEditHWSubmit
+            // 
+            this.btnEditHWSubmit.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditHWSubmit.Location = new System.Drawing.Point(3, 3);
+            this.btnEditHWSubmit.Name = "btnEditHWSubmit";
+            this.btnEditHWSubmit.Size = new System.Drawing.Size(242, 120);
+            this.btnEditHWSubmit.TabIndex = 0;
+            this.btnEditHWSubmit.Text = "Submit";
+            this.btnEditHWSubmit.UseVisualStyleBackColor = true;
+            this.btnEditHWSubmit.Click += new System.EventHandler(this.btnEditHWSubmit_Click);
+            // 
+            // btnEditHWCancel
+            // 
+            this.btnEditHWCancel.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditHWCancel.Location = new System.Drawing.Point(251, 3);
+            this.btnEditHWCancel.Name = "btnEditHWCancel";
+            this.btnEditHWCancel.Size = new System.Drawing.Size(240, 120);
+            this.btnEditHWCancel.TabIndex = 1;
+            this.btnEditHWCancel.Text = "Cancel";
+            this.btnEditHWCancel.UseVisualStyleBackColor = true;
+            this.btnEditHWCancel.Click += new System.EventHandler(this.btnEditHWCancel_Click);
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.Controls.Add(this.txtEditHWField);
+            this.flowLayoutPanel3.Controls.Add(this.button1);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 85);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(493, 36);
+            this.flowLayoutPanel3.TabIndex = 20;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(249, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(241, 30);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Submit Data";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(3, 59);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(243, 23);
+            this.label8.TabIndex = 21;
+            this.label8.Text = "Enter the field to be edited";
+            // 
+            // txtEditHWField
+            // 
+            this.txtEditHWField.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtEditHWField.Location = new System.Drawing.Point(3, 3);
+            this.txtEditHWField.Name = "txtEditHWField";
+            this.txtEditHWField.Size = new System.Drawing.Size(240, 30);
+            this.txtEditHWField.TabIndex = 22;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(3, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(317, 23);
+            this.label9.TabIndex = 22;
+            this.label9.Text = "Enter the Asset Number of the field";
+            // 
+            // txtEditHWAN
+            // 
+            this.txtEditHWAN.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtEditHWAN.Location = new System.Drawing.Point(3, 26);
+            this.txtEditHWAN.Name = "txtEditHWAN";
+            this.txtEditHWAN.Size = new System.Drawing.Size(494, 30);
+            this.txtEditHWAN.TabIndex = 23;
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.ClientSize = new System.Drawing.Size(1477, 714);
+            this.Controls.Add(this.flpEditHardware);
             this.Controls.Add(this.flpAddSoftware);
             this.Controls.Add(this.flpAddHardware);
             this.Controls.Add(this.flpSystemData);
@@ -691,6 +972,11 @@ namespace CMP307Project
             this.flpAddSoftware.ResumeLayout(false);
             this.flpAddSoftware.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.flpEditHardware.ResumeLayout(false);
+            this.flpEditHardware.PerformLayout();
+            this.flowLayoutPanel4.ResumeLayout(false);
+            this.flowLayoutPanel3.ResumeLayout(false);
+            this.flowLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -748,5 +1034,29 @@ namespace CMP307Project
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnSubmitSoftware;
         private System.Windows.Forms.Button btnCancelSoftware;
+        private System.Windows.Forms.FlowLayoutPanel flpEditHardware;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtEditHWSN;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtEditHWModel;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtEditHWManufacturer;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtEditHWAT;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtEditHWIP;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtEditHWPD;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtEditHWNotes;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
+        private System.Windows.Forms.Button btnEditHWSubmit;
+        private System.Windows.Forms.Button btnEditHWCancel;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtEditHWAN;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private System.Windows.Forms.TextBox txtEditHWField;
+        private System.Windows.Forms.Button button1;
     }
 }

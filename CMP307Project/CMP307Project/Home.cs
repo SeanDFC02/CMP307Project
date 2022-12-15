@@ -26,6 +26,9 @@ namespace CMP307Project
 
         public void InsertData() // Receives the data from the database and inserts it into lstView
         {
+            lstHardwareData.Items.Clear();
+            lstSoftwareData.Items.Clear();
+
             //  Select query
             SqlConnection conn;
 
@@ -42,15 +45,15 @@ namespace CMP307Project
             Command.Connection = conn;
 
             SqlDataReader data = Command.ExecuteReader();
-            lstHardwareData.Items.Add("AssNum\tSystem Name\tModel\tManufacturer\tType\tIP\t\tPurchase Date\t\tNotes");
+            lstHardwareData.Items.Add("AssNum\tSystem Name\tModel\tManufacture\tType\tIP\t\tPurchase Date\t\tNotes");
             while (data.Read())
             {
                 //  Inserts data into the list box lstView
-                lstHardwareData.Items.Add(data[0] + "\t" + data[1] + "\t" + data[2] + "\t" + data[3] + "\t" + data[4] + "\t" + data[5] + "\t" + data[6] + "\t" + data[7]);
+                lstHardwareData.Items.Add(data[0] + "\t" + data[1] + "\t\t" + data[2] + "\t" + data[3] + "\t" + data[4] + "\t" + data[5] + "\t" + data[6] + "\t" + data[7]);
             }
             data.Close();
 
-            string SWQuery = "SELECT * FROM SCOT.HARDWARE";
+            string SWQuery = "SELECT * FROM SCOT.SOFTWARE";
 
             SqlCommand Comm = new SqlCommand(SWQuery);
 
@@ -61,7 +64,7 @@ namespace CMP307Project
             while (SWData.Read())
             {
                 //  Inserts data into the list box lstView
-                lstHardwareData.Items.Add(data[0] + "\t" + data[1] + "\t" + data[2] + "\t" + data[3]);
+                lstSoftwareData.Items.Add(SWData[0] + "\t" + SWData[1] + "\t" + SWData[2] + "\t" + SWData[3]);
             }
             SWData.Close();
 
@@ -108,46 +111,70 @@ namespace CMP307Project
             string InsertPurchDate = txtInsertPurchDate.Text.ToString();
             string InsertNotes = txtInsertNotes.Text.ToString();
 
-            //  Insert query
-            SqlConnection conn;
+            if (InsertSysName == "")
+            {
+                MessageBox.Show("One or more required text boxes are not filled in");
+            }
+            else if (InsertModel == "")
+            {
+                MessageBox.Show("One or more required text boxes are not filled in");
+            }
+            else if (InsertManufacturer == "")
+            {
+                MessageBox.Show("One or more required text boxes are not filled in");
+            }
+            else if (InsertAssType == "")
+            {
+                MessageBox.Show("One or more required text boxes are not filled in");
+            }
+            else if (InsertIP == "")
+            {
+                MessageBox.Show("One or more required text boxes are not filled in");
+            }
+            else
+            {
+                //  Insert query
+                SqlConnection conn;
 
-            string connString = "Data Source = tolmount.abertay.ac.uk; Initial Catalog = mssql2002590; User ID = mssql2002590; Password = huG72W6hwB";
+                string connString = "Data Source = tolmount.abertay.ac.uk; Initial Catalog = mssql2002590; User ID = mssql2002590; Password = huG72W6hwB";
 
-            conn = new SqlConnection(connString);
+                conn = new SqlConnection(connString);
 
-            conn.Open();
-            Console.WriteLine("Connection successfully established.\n");
+                conn.Open();
+                Console.WriteLine("Connection successfully established.\n");
 
-            string insertQuery = "INSERT INTO dbo.ASSETS (SystemName, Model, Manufacturer, AssetType, IPAddress, PurchaseDate, Notes) VALUES " +
-                "('" + InsertSysName + "', '" + InsertModel + "', '" + InsertManufacturer + "', '" + InsertAssType + "', '" + InsertIP + "', '" + InsertPurchDate + "', '" + InsertNotes + "');";
+                string insertQuery = "INSERT INTO SCOT.HARDWARE (SystemName, Model, Manufacturer, AssetType, IPAddress, PurchaseDate, Notes) VALUES " +
+                    "('" + InsertSysName + "', '" + InsertModel + "', '" + InsertManufacturer + "', '" + InsertAssType + "', '" + InsertIP + "', '" + InsertPurchDate + "', '" + InsertNotes + "');";
 
-            SqlCommand Insertcommand = new SqlCommand(insertQuery, conn);
-            int n = Insertcommand.ExecuteNonQuery();
-            Console.WriteLine(n + " rows affected");
+                SqlCommand Insertcommand = new SqlCommand(insertQuery, conn);
+                int n = Insertcommand.ExecuteNonQuery();
+                Console.WriteLine(n + " rows affected");
 
-            conn.Close();
-            Console.WriteLine("\nConnection successfully terminated.");
+                conn.Close();
+                Console.WriteLine("\nConnection successfully terminated.");
 
-            //  Clears all text boxes after data has been submitted
-            txtInsertSysName.Clear();
-            txtInsertModel.Clear();
-            txtInsertManufacturer.Clear();
-            txtInsertAssType.Clear();
-            txtInsertIPAddr.Clear();
-            txtInsertPurchDate.Clear();
-            txtInsertNotes.Clear();
+                //  Clears all text boxes after data has been submitted
+                txtInsertSysName.Clear();
+                txtInsertModel.Clear();
+                txtInsertManufacturer.Clear();
+                txtInsertAssType.Clear();
+                txtInsertIPAddr.Clear();
+                txtInsertPurchDate.Clear();
+                txtInsertNotes.Clear();
 
-            changeVisibility();
+                changeVisibility();
 
-            //  Clears the list box lstView, ready to receive the new data
-            lstSystemHardware.Items.Clear();
+                //  Clears the list box lstView, ready to receive the new data
+                lstHardwareData.Items.Clear();
+                lstSoftwareData.Items.Clear();
 
-            //  Runs the insert data function again so that the
-            //  new data will be present in the list box when viewed
-            InsertData();
+                //  Runs the insert data function again so that the
+                //  new data will be present in the list box when viewed
+                InsertData();
 
-            //  Pop-up alert stating Data was successfully added
-            MessageBox.Show("Your data was successfully inputted into the database");
+                //  Pop-up alert stating Data was successfully added
+                MessageBox.Show("Your data was successfully inputted into the database");
+            }            
         }
 
         private void btnInsertCancel_Click(object sender, EventArgs e)
@@ -352,7 +379,7 @@ namespace CMP307Project
             changeVisibility();
 
             //  Clears the list box lstView, ready to receive the new data
-            lstSystemSoftware.Items.Clear();
+            lstSoftwareData.Items.Clear();
 
             //  Runs the insert data function again so that the
             //  new data will be present in the list box when viewed
@@ -366,11 +393,11 @@ namespace CMP307Project
         {
             changeVisibility();
 
-            DialogResult EditData = MessageBox.Show("Press Yes to Edit Hardware Data, Press No to Edit Software Data", "Edit Data", MessageBoxButtons.YesNo);
-            if (EditData == DialogResult.Yes)
+            DialogResult AddData = MessageBox.Show("Press Yes to Edit Hardware Data, Press No to Edit Software Data", "Edit Data", MessageBoxButtons.YesNo);
+            if (AddData == DialogResult.Yes)
             {
                 changeVisibility();
-                //flpEditHardware.Visible = true;
+                flpEditHardware.Visible = true;
             }
             else
             {
@@ -381,19 +408,17 @@ namespace CMP307Project
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            changeVisibility();
 
-            DialogResult EditData = MessageBox.Show("Press Yes to Edit Hardware Data, Press No to Edit Software Data", "Edit Data", MessageBoxButtons.YesNo);
-            if (EditData == DialogResult.Yes)
-            {
-                changeVisibility();
-                //flpEditHardware.Visible = true;
-            }
-            else
-            {
-                changeVisibility();
-                //flpEditSoftware.Visible = true;
-            }
+        }
+
+        private void btnEditHWCancel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEditHWSubmit_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
