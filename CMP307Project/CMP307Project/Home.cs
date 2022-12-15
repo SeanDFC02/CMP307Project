@@ -8,8 +8,6 @@ using System.Data.SqlClient;    //  When accessing the database
 using System.Data.SqlTypes;     //  when retrieving from database
 using System.Data;  //  for different data containers
 using System.Management;
-using System.Management.Instrumentation;
-using System.Security.Cryptography;
 
 namespace CMP307Project
 {
@@ -20,12 +18,12 @@ namespace CMP307Project
             //  On programme start these functions will be run
             InitializeComponent();
             InsertData();
-
             getSystemData();
         }
 
-        public void InsertData() // Receives the data from the database and inserts it into lstView
+        public void InsertData() // Receives the data from the database and inserts it into the necessary list boxes
         {
+            //  Clears the list boxes to avoid duplication
             lstHardwareData.Items.Clear();
             lstSoftwareData.Items.Clear();
 
@@ -48,11 +46,12 @@ namespace CMP307Project
             lstHardwareData.Items.Add("AssNum\tSystem Name\tModel\tManufacture\tType\tIP\t\tPurchase Date\t\tNotes");
             while (data.Read())
             {
-                //  Inserts data into the list box lstView
+                //  Inserts data into the list box lstHardwareData
                 lstHardwareData.Items.Add(data[0] + "\t" + data[1] + "\t\t" + data[2] + "\t" + data[3] + "\t" + data[4] + "\t" + data[5] + "\t" + data[6] + "\t" + data[7]);
             }
             data.Close();
 
+            //  Second Select Query
             string SWQuery = "SELECT * FROM SCOT.SOFTWARE";
 
             SqlCommand Comm = new SqlCommand(SWQuery);
@@ -63,7 +62,7 @@ namespace CMP307Project
             lstSoftwareData.Items.Add("AssNum\tOS Name\tVersion\tManufacturer");
             while (SWData.Read())
             {
-                //  Inserts data into the list box lstView
+                //  Inserts data into the list box lstSoftwareData
                 lstSoftwareData.Items.Add(SWData[0] + "\t" + SWData[1] + "\t" + SWData[2] + "\t" + SWData[3]);
             }
             SWData.Close();
@@ -87,15 +86,18 @@ namespace CMP307Project
         {
             changeVisibility();
 
+            //  Message box that provides the user with two options
             DialogResult AddData = MessageBox.Show("Press Yes to Add Hardware Data, Press No to Add Software Data", "Add Data", MessageBoxButtons.YesNo);
             if (AddData == DialogResult.Yes)
             {
                 changeVisibility();
+                //  Brings up the Add Hardware flp
                 flpAddHardware.Visible = true;                
             }
             else
             {
                 changeVisibility();
+                //  Brings up the Add Software flp
                 flpAddSoftware.Visible = true;
             }
         }
@@ -111,6 +113,7 @@ namespace CMP307Project
             string InsertPurchDate = txtInsertPurchDate.Text.ToString();
             string InsertNotes = txtInsertNotes.Text.ToString();
 
+            //  Error testing ensuring that all required inputs are inputted
             if (InsertSysName == "")
             {
                 MessageBox.Show("One or more required text boxes are not filled in");
@@ -143,6 +146,7 @@ namespace CMP307Project
                 conn.Open();
                 Console.WriteLine("Connection successfully established.\n");
 
+                //  Inserts hardware data into the database
                 string insertQuery = "INSERT INTO SCOT.HARDWARE (SystemName, Model, Manufacturer, AssetType, IPAddress, PurchaseDate, Notes) VALUES " +
                     "('" + InsertSysName + "', '" + InsertModel + "', '" + InsertManufacturer + "', '" + InsertAssType + "', '" + InsertIP + "', '" + InsertPurchDate + "', '" + InsertNotes + "');";
 
@@ -204,11 +208,14 @@ namespace CMP307Project
         private void btnLogin_Click(object sender, EventArgs e)
         {
             changeVisibility();
+            //  Brings up the login flp
             flpLogin.Visible = true;
         }
 
         private void changeVisibility()
         {
+            //  Hides everything whenever the changeVisibility function is run
+            //  to avoid having more than one list box or flp on screen at a time
             flpLogin.Visible = false;
             flpAddHardware.Visible = false;
             lstSystemHardware.Visible = false;
@@ -224,10 +231,12 @@ namespace CMP307Project
 
         private void btnSubmitLogin_Click(object sender, EventArgs e)
         {
+            //  Declares local variables with the info received from the text input boxes
             string username = txtUsername.Text.ToString();
             string password = txtPassword.Text.ToString();
             string userPass;
 
+            //  Select Query
             SqlConnection conn;
             string connString = "Data Source = tolmount.abertay.ac.uk; Initial Catalog = mssql2002590; User ID = mssql2002590; Password = huG72W6hwB";
             conn = new SqlConnection(connString);
@@ -237,18 +246,22 @@ namespace CMP307Project
             SqlCommand  command = new SqlCommand(query, conn);
             SqlDataReader data = command.ExecuteReader();
 
+            //  if the username and/or password is blank then this is run
             if (txtUsername.Text == "" || txtPassword.Text == "")
             {
                 txtUsername.Clear();
                 txtPassword.Clear();
+                //  Shows a message stating that the username and/or password cant be left blank
                 MessageBox.Show("A username and password must be inputted to log in.");
             }
+            //  If data matching the username is found in the table
             else if (data.HasRows)
             {
                 while (data.Read())
                 {
                     userPass = Convert.ToString(data[1]);
-
+                    //  Runs if the passwords match
+                    // Example password and user if needed is Admin and Admin
                     if (password == userPass)
                     {
                         txtUsername.Clear();
@@ -263,17 +276,20 @@ namespace CMP307Project
                         btnLogin.Text = "Logged in";
                         changeVisibility();
 
+                        //  Shows the user a success message
                         MessageBox.Show("User has successfully logged in!");
                     }
                     else
                     {
                         txtUsername.Clear();
                         txtPassword.Clear();
+                        //  Shows the user a message that the password or username is incorrect
                         MessageBox.Show("Incorrect username or password. Please try again");
                     }
                 }
             }
             else
+            //  If the username doesnt match to the data in the table
             {
                 txtUsername.Clear();
                 txtPassword.Clear();
@@ -293,6 +309,7 @@ namespace CMP307Project
 
         private void getSystemData()
         {
+            //  gets the hardware data using the Win32 classes
             getHardwareData("Win32_Processor");
             getHardwareData("Win32_DiskDrive");
             getHardwareData("Win32_SoundDevice");
@@ -301,6 +318,7 @@ namespace CMP307Project
             getHardwareData("Win32_PointingDevice");
             getHardwareData("Win32_NetworkAdapter");
 
+            //  Gets the software data using the Win32 classes
             getSoftwareData("Win32_ComputerSystem");
             getSoftwareData("Win32_OperatingSystem");
             getSoftwareData("Win32_Registry");
@@ -313,6 +331,7 @@ namespace CMP307Project
             ManagementObjectSearcher mos = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM " + hwclass);
             foreach (ManagementObject mj in mos.Get())
             {
+                //  Gets the info needed for each item in the Win32 class
                 lstSystemHardware.Items.Add("Hardware Name: " + Convert.ToString(mj["Name"]));
                 lstSystemHardware.Items.Add("Hardware Description: " + Convert.ToString(mj["Description"]));
                 lstSystemHardware.Items.Add("Hardware System Name: " + Convert.ToString(mj["SystemName"]));
@@ -326,6 +345,7 @@ namespace CMP307Project
             ManagementObjectSearcher mos = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM " + hwclass);
             foreach (ManagementObject mj in mos.Get())
             {
+                //  Gets the info needed for each item in the Win32 class
                 lstSystemSoftware.Items.Add("Software Name: " + Convert.ToString(mj["Name"]));
                 lstSystemSoftware.Items.Add("Software Description: " + Convert.ToString(mj["Description"]));
                 lstSystemSoftware.Items.Add("Software Status: " + Convert.ToString(mj["Status"]));
@@ -335,6 +355,7 @@ namespace CMP307Project
 
         private void btnViewSoftware_Click(object sender, EventArgs e)
         {
+            //  shows the software data list box
             changeVisibility();
             InsertData();
 
@@ -399,6 +420,7 @@ namespace CMP307Project
         {
             changeVisibility();
 
+            //  Gives the user a choice to select to edit the hardware data or the software data
             DialogResult AddData = MessageBox.Show("Press Yes to Edit Hardware Data, Press No to Edit Software Data", "Edit Data", MessageBoxButtons.YesNo);
             if (AddData == DialogResult.Yes)
             {
@@ -423,7 +445,7 @@ namespace CMP307Project
         private void btnDelete_Click(object sender, EventArgs e)
         {
             changeVisibility();
-
+            //  Gives the user a choice to select to delete the hardware data or the software data
             DialogResult AddData = MessageBox.Show("Press Yes to Delete Hardware Data, Press No to Delete Software Data", "Delete Data", MessageBoxButtons.YesNo);
             if (AddData == DialogResult.Yes)
             {
@@ -448,10 +470,12 @@ namespace CMP307Project
 
         private void btnEditHWSubmit_Click(object sender, EventArgs e)
         {
+            //  Declares local variables using info from the text input boxes
             int EditHWAN = int.Parse(txtEditHWAN.Text);
             string EditHWDataInput = txtEditHWDataInput.Text.ToString();
             string EditHWField = txtEditHWField.Text.ToString();
 
+            //  Update query
             SqlConnection conn;
             string connString = "Data Source = tolmount.abertay.ac.uk; Initial Catalog = mssql2002590; User ID = mssql2002590; Password = huG72W6hwB";
             conn = new SqlConnection(connString);
@@ -481,22 +505,23 @@ namespace CMP307Project
         private void btnEditSWFieldSubmit_Click(object sender, EventArgs e)
         {
             txtEditSWDataInput.Enabled = true;
-
         }
 
         private void btnEditSWSubmit_Click(object sender, EventArgs e)
         {
+            //  Declares local variables with the input from the text input boxes
             int EditSWAN = int.Parse(txtEditSWAN.Text);
             string EditSWDataInput = txtEditSWDataInput.Text.ToString();
             string EditSWField = txtEditSWField.Text.ToString();
 
+            //  Update query
             SqlConnection conn;
             string connString = "Data Source = tolmount.abertay.ac.uk; Initial Catalog = mssql2002590; User ID = mssql2002590; Password = huG72W6hwB";
             conn = new SqlConnection(connString);
 
             conn.Open();
             Console.WriteLine("Connection Successfully established.\n");
-
+                        
             string query = "UPDATE SCOT.SOFTWARE SET Manufacturer = '" + EditSWDataInput + "' WHERE AssetNum = '" + EditSWAN + "';";
             SqlCommand Command = new SqlCommand(query);
             Command.Connection = conn;
@@ -523,6 +548,7 @@ namespace CMP307Project
         {
             int DelHWAN = int.Parse(txtDelHWAN.Text);
 
+            //  Delete query
             SqlConnection conn;
             string connString = "Data Source = tolmount.abertay.ac.uk; Initial Catalog = mssql2002590; User ID = mssql2002590; Password = huG72W6hwB";
             conn = new SqlConnection(connString);
@@ -549,6 +575,8 @@ namespace CMP307Project
         {
             int DelSWAN = int.Parse(txtDelSWAN.Text);
 
+
+            //  Delete query
             SqlConnection conn;
             string connString = "Data Source = tolmount.abertay.ac.uk; Initial Catalog = mssql2002590; User ID = mssql2002590; Password = huG72W6hwB";
             conn = new SqlConnection(connString);
